@@ -1,0 +1,101 @@
+Script started on 2024-03-12 11:30:08+04:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="210" LINES="57"]
+[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ systemctl status nginx
+[?2004l[?1h=○ nginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (/lib/systemd/system/nginx.service; disabled; vendor preset: enabled)[m
+     Active: inactive (dead)[m
+       Docs: man:nginx(8)[m
+[m
+Mar 12 11:01:18 DESKTOP-AK53P7T systemd[1]: Starting A high performance web server and a reverse proxy server...[m
+Mar 12 11:01:18 DESKTOP-AK53P7T systemd[1]: Started A high performance web server and a reverse proxy server.[m
+Mar 12 11:09:16 DESKTOP-AK53P7T systemd[1]: Stopping A high performance web server and a reverse proxy server...[m
+Mar 12 11:09:16 DESKTOP-AK53P7T systemd[1]: nginx.service: Deactivated successfully.[m
+Mar 12 11:09:16 DESKTOP-AK53P7T systemd[1]: Stopped A high performance web server and a reverse proxy server.[m
+[K[?1l>[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ cat /lin[Kbb[K/systemd/ng[K[Ksystemt[K
+system/                          systemd-binfmt                   systemd-hostnamed                systemd-networkd-wait-online     systemd-sleep                    systemd-update-utmp
+system-environment-generators/   systemd-bless-boot               systemd-initctl                  systemd-pstore                   systemd-socket-proxyd            systemd-user-runtime-dir
+system-generators/               systemd-boot-check-no-failures   systemd-journald                 systemd-quotacheck               systemd-sulogin-shell            systemd-user-sessions
+system-preset/                   systemd-cgroups-agent            systemd-localed                  systemd-random-seed              systemd-sysctl                   systemd-veritysetup
+system-shutdown/                 systemd-cryptsetup               systemd-logind                   systemd-remount-fs               systemd-sysv-install             systemd-volatile-root
+system-sleep/                    systemd-fsck                     systemd-makefs                   systemd-reply-password           systemd-time-wait-sync           systemd-xdg-autostart-condition
+systemd                          systemd-fsckd                    systemd-modules-load             systemd-resolved                 systemd-timedated                
+systemd-ac-power                 systemd-growfs                   systemd-network-generator        systemd-rfkill                   systemd-timesyncd                
+systemd-backlight                systemd-hibernate-resume         systemd-networkd                 systemd-shutdown                 systemd-udevd                    
+]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ cat /lib/systemd/system/nginx.service 
+[?2004l# Stop dance for nginx
+# =======================
+#
+# ExecStop sends SIGSTOP (graceful stop) to the nginx process.
+# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control
+# and sends SIGTERM (fast shutdown) to the main process.
+# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends
+# SIGKILL to all the remaining processes in the process group (KillMode=mixed).
+#
+# nginx signals reference doc:
+# http://nginx.org/en/docs/control.html
+#
+[Unit]
+Description=A high performance web server and a reverse proxy server
+Documentation=man:nginx(8)
+After=network.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/run/nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
+ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
+ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid
+TimeoutStopSec=5
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ cat /lib/systemd/system/nginx.service [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1@n[1@a[1@n[1@o[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@n[1@e[1@w
+[?2004l[?2004h[?1049h[22;0;0t[1;57r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[55;80H(B[0;1m[37m[41m[ Directory '/lib/systemd/system' is not writable ][39;49m(B[m[H(B[0;7m  GNU nano 6.2                                                                           /lib/systemd/system/newnginx.service                                                                                     [1;209H(B[m[56d(B[0;7m^G(B[m Help[56;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[56;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[56;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[56;188H(B[0;7m^◂(B[m Prev Word[57d(B[0;7m^X(B[m Exit[57;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[57;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[57;120H(B[0;7mM-6(B[m Copy[57;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[57;171H(B[0;7m^F(B[m Forward[188G(B[0;7m^▸(B[m Next Word[2d[?12l[?25h[?25l[55d[J[57d[?12l[?25h[57;1H[?1049l[23;0;0t[?1l>[?2004l[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ nano /lib/systemd/system/newnginx.service [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@s[1@u[1@d[1@o[1@ 
+[?2004l[sudo] password for codeby: 
+[?2004h[?1049h[22;0;0t[1;57r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[55;100H(B[0;7m[ New File ](B[m[H(B[0;7m  GNU nano 6.2                                                                           /lib/systemd/system/newnginx.service                                                                                     [1;209H(B[m[56d(B[0;7m^G(B[m Help[56;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[56;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[56;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[56;188H(B[0;7m^◂(B[m Prev Word[57d(B[0;7m^X(B[m Exit[57;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[57;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[57;120H(B[0;7mM-6(B[m Copy[57;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[57;171H(B[0;7m^F(B[m Forward[188G(B[0;7m^▸(B[m Next Word[2d[?12l[?25h[?25l[55d[K[1;127H(B[0;7m*[209G(B[m[2d[36m# Stop dance for nginx[3d# =======================[4d#[5d# ExecStop sends SIGSTOP (graceful stop) to the nginx process.[6d# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control[7d# and sends SIGTERM (fast shutdown) to the main process.[8d# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends[9d# SIGKILL to all the remaining processes in the process group (KillMode=mixed).[10d#[11d# nginx signals reference doc:[12d# http://nginx.org/en/docs/control.html[13d#[14d(B[0;1m[32m[Unit][15d[39m(B[mDescription=A high performance web server and a reverse proxy server[16dDocumentation=man:nginx(8)[17dAfter=network.target nss-lookup.target[19d(B[0;1m[32m[Service][20d[39m(B[mType=forking[21dPIDFile=/run/nginx.pid[22dExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'[23dExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'[24dExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload[25dExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid[26dTimeoutStopSec=5[27dKillMode=mixed[29d(B[0;1m[32m[Install][30d[39m(B[mWantedBy=multi-user.target[?12l[?25h[?25l[55d(B[0;7mSave modified buffer?                                                                                                                                                                                             [56;1H Y(B[m Yes[K[57d(B[0;7m N(B[m No  [57;17H(B[0;7m^C(B[m Cancel[K[55;23H[?12l[?25h[?25l[56d(B[0;7m^G(B[m Help[56;53H(B[0;7mM-D(B[m DOS Format[56;105H(B[0;7mM-A(B[m Append[56;157H(B[0;7mM-B(B[m Backup File[57d(B[0;7m^C(B[m Cancel[17G         [57;53H(B[0;7mM-M(B[m Mac Format[57;105H(B[0;7mM-P(B[m Prepend[57;157H(B[0;7m^T(B[m Browse[55d(B[0;7mFile Name to Write: /lib/systemd/system/newnginx.service(B[m[?12l[?25h[?25l[55;98H[1K (B[0;7m[ Writing... ](B[m[K[1;127H(B[0;7m [209G(B[m[55;97H(B[0;7m[ Wrote 29 lines ](B[m[J[57d[?12l[?25h[57;1H[?1049l[23;0;0t[?1l>[?2004l[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ sudo systemctl daemon-reload
+[?2004l[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ sudo su[K\ys[K[K[Kystemctl newnginx.servicr[Kesnewnginx.servicetnewnginx.serviceanewnginx.servicernewnginx.servicetnewnginx.service newnginx.service
+[?2004l[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ sudo systemctl start newnginx.service[5P newnginx.services newnginx.servicet newnginx.servicea newnginx.servicet newnginx.serviceu newnginx.services newnginx.service
+[?2004l[?1h=[0;1;32m●[0m newnginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (/lib/systemd/system/newnginx.service; disabled; vendor preset: enabled)[m
+     Active: [0;1;32mactive (running)[0m since Tue 2024-03-12 11:33:15 +04; 6s ago[m
+       Docs: man:nginx(8)[m
+    Process: 9492 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)[m
+    Process: 9493 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)[m
+   Main PID: 9494 (nginx)[m
+      Tasks: 5 (limit: 9492)[m
+     Memory: 4.7M[m
+     CGroup: /system.slice/newnginx.service[m
+             ├─9494 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"[m
+             ├─9495 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""[m
+             ├─9496 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""[m
+             ├─9497 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""[m
+             └─9498 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""[m
+[m
+Mar 12 11:33:15 Faded-Chrysantemum systemd[1]: Starting A high performance web server and a reverse proxy server...[m
+Mar 12 11:33:15 Faded-Chrysantemum systemd[1]: Started A high performance web server and a reverse proxy server.[m
+[K[?1l>[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ sudo systemctl status newnginx.service[6P newnginx.servicee newnginx.servicen newnginx.servicea newnginx.serviceb newnginx.servicel newnginx.servicee newnginx.service
+[?2004lCreated symlink /etc/systemd/system/multi-user.target.wants/newnginx.service → /lib/systemd/system/newnginx.service.
+[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ sudo systemctl enable newnginx.servicestatus[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004l[?1h=[0;1;32m●[0m newnginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (/lib/systemd/system/newnginx.service; enabled; vendor preset: enabled)[m
+     Active: [0;1;32mactive (running)[0m since Tue 2024-03-12 11:33:15 +04; 20s ago[m
+       Docs: man:nginx(8)[m
+   Main PID: 9494 (nginx)[m
+      Tasks: 5 (limit: 9492)[m
+     Memory: 4.7M[m
+     CGroup: /system.slice/newnginx.service[m
+             ├─9494 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"[m
+             ├─9495 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""[m
+             ├─9496 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""[m
+             ├─9497 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""[m
+             └─9498 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""[m
+[m
+Mar 12 11:33:15 Faded-Chrysantemum systemd[1]: Starting A high performance web server and a reverse proxy server...[m
+Mar 12 11:33:15 Faded-Chrysantemum systemd[1]: Started A high performance web server and a reverse proxy server.[m
+[K[?1l>[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ excit
+[?2004lexcit: command not found
+[?2004h]0;codeby@Faded-Chrysantemum: ~[01;32mcodeby@Faded-Chrysantemum[00m:[01;34m~[00m$ exit
+[?2004lexit
+
+Script done on 2024-03-12 11:33:48+04:00 [COMMAND_EXIT_CODE="127"]

@@ -1,0 +1,166 @@
+Script started on 2024-03-11 13:33:14+03:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="210" LINES="57"]
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ ps -eFH
+[?2004lUID          PID    PPID  C    SZ   RSS PSR STIME TTY          TIME CMD
+root           1       0  1 41798 12444   1 10:33 ?        00:03:07 /sbin/init
+root           2       1  0   570  1300   3 10:33 ?        00:00:00   /init
+root           7       2  0   581   132   1 10:33 ?        00:00:00     plan9 --control-socket 6 --log-level 4 --server-fd 7 --pipe-fd 9 --log-truncate
+root         397       2  0  1881  4976   2 10:33 pts/1    00:00:00     /bin/login -f
+codeby       437     397  0  1531  4816   0 10:33 pts/1    00:00:00       -bash
+root        1033       2  0   571   116   0 10:35 ?        00:00:00     /init
+root        1034    1033  0   575   120   0 10:35 ?        00:00:00       /init
+codeby      1035    1034  0  1652  5648   3 10:35 pts/0    00:00:00         -bash
+root       24445       2  0   571   116   1 12:12 ?        00:00:00     /init
+root       24446   24445  0   575   120   1 12:12 ?        00:00:00       /init
+codeby     24451   24446  0  1586  5364   2 12:12 pts/2    00:00:00         -bash
+codeby     43093   24451  0  1848  3184   1 13:32 pts/2    00:00:00           top
+root       43173       2  0   571   116   2 13:33 ?        00:00:00     /init
+root       43174   43173  0   575   120   0 13:33 ?        00:00:00       /init
+codeby     43175   43174  0  1554  5080   2 13:33 pts/3    00:00:00         -bash
+codeby     43236   43175  0   807  1112   0 13:33 pts/3    00:00:00           script ps-log.txt
+codeby     43237   43236  0  1521  5120   1 13:33 pts/4    00:00:00             bash -i
+codeby     43326   43237  0  1911  3116   0 13:33 pts/4    00:00:00               ps -eFH
+root          45       1  0 16054 18292   1 10:33 ?        00:00:00   /lib/systemd/systemd-journald
+root          76       1  0  5558  6152   3 10:33 ?        00:00:00   /lib/systemd/systemd-udevd
+root          98       1  0  1124   148   3 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/bare_5.snap /snap/bare/5 -o ro,nodev,allow_other,suid
+root         100       1  0  1213  1692   3 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/core22_864.snap /snap/core22/864 -o ro,nodev,allow_other,suid
+root         101       1  0  1124   168   0 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/snapd_20671.snap /snap/snapd/20671 -o ro,nodev,allow_other,suid
+root         102       1  0  1192  1896   0 10:33 ?        00:00:02   snapfuse /var/lib/snapd/snaps/snapd_21184.snap /snap/snapd/21184 -o ro,nodev,allow_other,suid
+root         103       1  0  1192  1716   1 10:33 ?        00:00:01   snapfuse /var/lib/snapd/snaps/ubuntu-desktop-installer_1286.snap /snap/ubuntu-desktop-installer/1286 -o ro,nodev,allow_other,suid
+root         104       1  0  1124   196   3 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/ubuntu-desktop-installer_1284.snap /snap/ubuntu-desktop-installer/1284 -o ro,nodev,allow_other,suid
+root         105       1  0  1157   184   3 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/gtk-common-themes_1535.snap /snap/gtk-common-themes/1535 -o ro,nodev,allow_other,suid
+systemd+     168       1  0  6385 12556   3 10:33 ?        00:00:00   /lib/systemd/systemd-resolved
+root         200       1  0  1077  2736   3 10:33 ?        00:00:00   /usr/sbin/cron -f -P
+message+     202       1  0  2163  4908   2 10:33 ?        00:00:00   @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         205       1  0  7524 19052   3 10:33 ?        00:00:00   /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+syslog       206       1  0 55601  4780   0 10:33 ?        00:00:00   /usr/sbin/rsyslogd -n -iNONE
+root         210       1  0 366734 41120  0 10:33 ?        00:00:01   /usr/lib/snapd/snapd
+root         211       1  0  3845  7632   2 10:33 ?        00:00:00   /lib/systemd/systemd-logind
+root         235       1  0  1196  3400   1 10:33 ?        00:00:00   /bin/bash /snap/ubuntu-desktop-installer/1286/bin/subiquity-server
+root         357     235  0 235787 82988  0 10:33 ?        00:00:10     /snap/ubuntu-desktop-installer/1286/usr/bin/python3.10 -m subiquity.cmd.server --use-os-prober --storage-version=2 --postinst-hooks-dir=/s
+root         449     357  0 11056 37632   2 10:33 ?        00:01:07       python3 /snap/ubuntu-desktop-installer/1286/usr/bin/cloud-init status --wait
+root         237       1  0 26805 21392   3 10:33 ?        00:00:00   /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         240       1  0   810  1112   3 10:33 hvc0     00:00:00   /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+root         242       1  0   799  1168   1 10:33 tty1     00:00:00   /sbin/agetty -o -p -- \u --noclear tty1 linux
+codeby       431       1  0  4233  9088   0 10:33 ?        00:00:00   /lib/systemd/systemd --user
+codeby       432     431  0 42196  3420   0 10:33 ?        00:00:00     (sd-pam)
+root        8479       1  0 73251 22308   2 11:05 ?        00:00:00   /usr/libexec/packagekitd
+root        8485       1  0 58625  8764   0 11:05 ?        00:00:00   /usr/libexec/polkitd --no-debug
+root       21866       1  0  3859  8708   0 12:01 ?        00:00:00   sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ ps -u codeby
+[?2004l    PID TTY          TIME CMD
+    431 ?        00:00:00 systemd
+    432 ?        00:00:00 (sd-pam)
+    437 pts/1    00:00:00 bash
+   1035 pts/0    00:00:00 bash
+  24451 pts/2    00:00:00 bash
+  43093 pts/2    00:00:00 top
+  43175 pts/3    00:00:00 bash
+  43236 pts/3    00:00:00 script
+  43237 pts/4    00:00:00 bash
+  43366 pts/4    00:00:00 ps
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ top &
+[?2004l[1] 43389
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ [?1l>ps ki[K[Kstop 43389
+[?2004lerror: TTY could not be found
+
+Usage:
+ ps [options]
+
+ Try 'ps --help <simple|list|output|threads|misc|all>'
+  or 'ps --help <s|l|o|t|m|a>'
+ for additional help text.
+
+For more details see ps(1).
+
+[1]+  Stopped                 top
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ exit
+[?2004lexit
+There are stopped jobs.
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34mcodeby-devops[0m  ps-log.txt
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ cat ps-log.txt 
+[?2004lScript started on 2024-03-11 13:33:14+03:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="210" LINES="57"]
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ ps -eFH
+[?2004lUID          PID    PPID  C    SZ   RSS PSR STIME TTY          TIME CMD
+root           1       0  1 41798 12444   1 10:33 ?        00:03:07 /sbin/init
+root           2       1  0   570  1300   3 10:33 ?        00:00:00   /init
+root           7       2  0   581   132   1 10:33 ?        00:00:00     plan9 --control-socket 6 --log-level 4 --server-fd 7 --pipe-fd 9 --log-truncate
+root         397       2  0  1881  4976   2 10:33 pts/1    00:00:00     /bin/login -f
+codeby       437     397  0  1531  4816   0 10:33 pts/1    00:00:00       -bash
+root        1033       2  0   571   116   0 10:35 ?        00:00:00     /init
+root        1034    1033  0   575   120   0 10:35 ?        00:00:00       /init
+codeby      1035    1034  0  1652  5648   3 10:35 pts/0    00:00:00         -bash
+root       24445       2  0   571   116   1 12:12 ?        00:00:00     /init
+root       24446   24445  0   575   120   1 12:12 ?        00:00:00       /init
+codeby     24451   24446  0  1586  5364   2 12:12 pts/2    00:00:00         -bash
+codeby     43093   24451  0  1848  3184   1 13:32 pts/2    00:00:00           top
+root       43173       2  0   571   116   2 13:33 ?        00:00:00     /init
+root       43174   43173  0   575   120   0 13:33 ?        00:00:00       /init
+codeby     43175   43174  0  1554  5080   2 13:33 pts/3    00:00:00         -bash
+codeby     43236   43175  0   807  1112   0 13:33 pts/3    00:00:00           script ps-log.txt
+codeby     43237   43236  0  1521  5120   1 13:33 pts/4    00:00:00             bash -i
+codeby     43326   43237  0  1911  3116   0 13:33 pts/4    00:00:00               ps -eFH
+root          45       1  0 16054 18292   1 10:33 ?        00:00:00   /lib/systemd/systemd-journald
+root          76       1  0  5558  6152   3 10:33 ?        00:00:00   /lib/systemd/systemd-udevd
+root          98       1  0  1124   148   3 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/bare_5.snap /snap/bare/5 -o ro,nodev,allow_other,suid
+root         100       1  0  1213  1692   3 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/core22_864.snap /snap/core22/864 -o ro,nodev,allow_other,suid
+root         101       1  0  1124   168   0 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/snapd_20671.snap /snap/snapd/20671 -o ro,nodev,allow_other,suid
+root         102       1  0  1192  1896   0 10:33 ?        00:00:02   snapfuse /var/lib/snapd/snaps/snapd_21184.snap /snap/snapd/21184 -o ro,nodev,allow_other,suid
+root         103       1  0  1192  1716   1 10:33 ?        00:00:01   snapfuse /var/lib/snapd/snaps/ubuntu-desktop-installer_1286.snap /snap/ubuntu-desktop-installer/1286 -o ro,nodev,allow_other,suid
+root         104       1  0  1124   196   3 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/ubuntu-desktop-installer_1284.snap /snap/ubuntu-desktop-installer/1284 -o ro,nodev,allow_other,suid
+root         105       1  0  1157   184   3 10:33 ?        00:00:00   snapfuse /var/lib/snapd/snaps/gtk-common-themes_1535.snap /snap/gtk-common-themes/1535 -o ro,nodev,allow_other,suid
+systemd+     168       1  0  6385 12556   3 10:33 ?        00:00:00   /lib/systemd/systemd-resolved
+root         200       1  0  1077  2736   3 10:33 ?        00:00:00   /usr/sbin/cron -f -P
+message+     202       1  0  2163  4908   2 10:33 ?        00:00:00   @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         205       1  0  7524 19052   3 10:33 ?        00:00:00   /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+syslog       206       1  0 55601  4780   0 10:33 ?        00:00:00   /usr/sbin/rsyslogd -n -iNONE
+root         210       1  0 366734 41120  0 10:33 ?        00:00:01   /usr/lib/snapd/snapd
+root         211       1  0  3845  7632   2 10:33 ?        00:00:00   /lib/systemd/systemd-logind
+ro[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ subl ps-log.txt 
+[?2004lCommand 'subl' not found, but can be installed with:
+sudo snap install sublime-text
+[?2004h]0;codeby@Faded-Chrysanthemum: ~[01;32mcodeby@Faded-Chrysanthemum[00m:[01;34m~[00m$ nano ps-log.txt 
+[?2004l[?2004h[?1049h[22;0;0t[1;57r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[55;99H(B[0;7m[ Reading... ](B[m[55;97H(B[0;7m[ Read 95 lines ](B[m[H(B[0;7m  GNU nano 6.2                                                                                        ps-log.txt                                                                                                  [1;209H(B[m[56d(B[0;7m^G(B[m Help[56;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[56;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[56;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[56;188H(B[0;7m^◂(B[m Prev Word[57d(B[0;7m^X(B[m Exit[57;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[57;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[57;120H(B[0;7mM-6(B[m Copy[57;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[57;171H(B[0;7m^F(B[m Forward[188G(B[0;7m^▸(B[m Next Word[2dScript started on 2024-03-11 13:33:14+03:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="210" LINES="57"][3d[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;codeby@Faded-Chrysanthemum: ~[38;5;208m^G^[[39m(B[m[01;32mcodeby@Faded-Chrysanthemum[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~[38;5;208m^[[39m(B[m[00m$ ps -eFH[4d[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[mUID[4;25HPID    PPID  C    SZ   RSS PSR STIME TTY[4;75HTIME CMD[5droot[5;16H1[24G0  1 41798 12444   1 10:33 ?[5;60H00:03:07 /sbin/init[6droot[6;16H2[24G1  0   570  1300   3 10:33 ?[6;60H00:00:00   /init[7droot[7;16H7[24G2  0   581   132   1 10:33 ?[7;60H00:00:00     plan9 --control-socket 6 --log-level 4 --server-fd 7 --pipe-fd 9 --log-truncate[8droot[8;14H397[24G2  0  1881  4976   2 10:33 pts/1    00:00:00     /bin/login -f[9dcodeby[14G437     397  0  1531  4816   0 10:33 pts/1    00:00:00[75G-bash[10droot[10;13H1033[24G2  0   571   116   0 10:35 ?[10;60H00:00:00     /init[11droot[11;13H1034    1033  0   575   120   0 10:35 ?[11;60H00:00:00[75G/init[12dcodeby[13G1035    1034  0  1652  5648   3 10:35 pts/0    00:00:00[12;77H-bash[13droot[12G24445[24G2  0   571   116   1 12:12 ?[13;60H00:00:00     /init[14droot[12G24446   24445  0   575   120   1 12:12 ?[14;60H00:00:00[75G/init[15dcodeby     24451   24446  0  1586  5364   2 12:12 pts/2    00:00:00[15;77H-bash[16dcodeby     43093   24451  0  1848  3184   1 13:32 pts/2    00:00:00[16;79Htop[17droot[12G43173[24G2  0   571   116   2 13:33 ?[17;60H00:00:00     /init[18droot[12G43174   43173  0   575   120   0 13:33 ?[18;60H00:00:00[75G/init[19dcodeby     43175   43174  0  1554  5080   2 13:33 pts/3    00:00:00[19;77H-bash[20dcodeby     43236   43175  0   807  1112   0 13:33 pts/3    00:00:00[20;79Hscript ps-log.txt[21dcodeby     43237   43236  0  1521  5120   1 13:33 pts/4    00:00:00[21;81Hbash -i[22dcodeby     43326   43237  0  1911  3116   0 13:33 pts/4    00:00:00[22;83Hps -eFH[23droot[23;15H45[24G1  0 16054 18292   1 10:33 ?[23;60H00:00:00   /lib/systemd/systemd-journald[24droot[24;15H76[24G1  0  5558  6152   3 10:33 ?[24;60H00:00:00   /lib/systemd/systemd-udevd[25droot[25;15H98[24G1  0  1124   148   3 10:33 ?[25;60H00:00:00   snapfuse /var/lib/snapd/snaps/bare_5.snap /snap/bare/5 -o ro,nodev,allow_other,suid[26droot[26;14H100[24G1  0  1213  1692   3 10:33 ?[26;60H00:00:00   snapfuse /var/lib/snapd/snaps/core22_864.snap /snap/core22/864 -o ro,nodev,allow_other,suid[27droot[27;14H101[24G1  0  1124   168   0 10:33 ?[27;60H00:00:00   snapfuse /var/lib/snapd/snaps/snapd_20671.snap /snap/snapd/20671 -o ro,nodev,allow_other,suid[28droot[28;14H102[24G1  0  1192  1896   0 10:33 ?[28;60H00:00:02   snapfuse /var/lib/snapd/snaps/snapd_21184.snap /snap/snapd/21184 -o ro,nodev,allow_other,suid[29droot[29;14H103[24G1  0  1192  1716   1 10:33 ?[29;60H00:00:01   snapfuse /var/lib/snapd/snaps/ubuntu-desktop-installer_1286.snap /snap/ubuntu-desktop-installer/1286 -o ro,nodev,allow_other,suid[30droot[30;14H104[24G1  0  1124   196   3 10:33 ?[30;60H00:00:00   snapfuse /var/lib/snapd/snaps/ubuntu-desktop-installer_1284.snap /snap/ubuntu-desktop-installer/1284 -o ro,nodev,allow_other,suid[31droot[31;14H105[24G1  0  1157   184   3 10:33 ?[31;60H00:00:00   snapfuse /var/lib/snapd/snaps/gtk-common-themes_1535.snap /snap/gtk-common-themes/1535 -o ro,nodev,allow_other,suid[32dsystemd+     168[24G1  0  6385 12556   3 10:33 ?[32;60H00:00:00   /lib/systemd/systemd-resolved[33droot[33;14H200[24G1  0  1077  2736   3 10:33 ?[33;60H00:00:00   /usr/sbin/cron -f -P[34dmessage+     202[24G1  0  2163  4908   2 10:33 ?[34;60H00:00:00   @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only[35droot[35;14H205[24G1  0  7524 19052   3 10:33 ?[35;60H00:00:00   /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers[36dsyslog[14G206[24G1  0 55601  4780   0 10:33 ?[36;60H00:00:00   /usr/sbin/rsyslogd -n -iNONE[37droot[37;14H210[24G1  0 366734 41120  0 10:33 ?[37;60H00:00:01   /usr/lib/snapd/snapd[38droot[38;14H211[24G1  0  3845  7632   2 10:33 ?[38;60H00:00:00   /lib/systemd/systemd-logind[39droot[39;14H235[24G1  0  1196  3400   1 10:33 ?[39;60H00:00:00   /bin/bash /snap/ubuntu-desktop-installer/1286/bin/subiquity-server[40droot[40;14H357     235  0 235787 82988  0 10:33 ?[40;60H00:00:10     /snap/ubuntu-desktop-installer/1286/usr/bin/python3.10 -m subiquity.cmd.server --use-os-prober --storage-version=2 --postinst-hooks-dir=/s[41;1Hroot[41;14H449     357  0 11056 37632   2 10:33 ?[41;60H00:01:07[75Gpython3 /snap/ubuntu-desktop-installer/1286/usr/bin/cloud-init status --wait[42droot[42;14H237[24G1  0 26805 21392   3 10:33 ?[42;60H00:00:00   /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal[43droot[43;14H240[24G1  0   810  1112   3 10:33 hvc0     00:00:00   /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220[44droot[44;14H242[24G1  0   799  1168   1 10:33 tty1     00:00:00   /sbin/agetty -o -p -- \u --noclear tty1 linux[45dcodeby[14G431[24G1  0  4233  9088   0 10:33 ?[45;60H00:00:00   /lib/systemd/systemd --user[46dcodeby[14G432     431  0 42196  3420   0 10:33 ?[46;60H00:00:00     (sd-pam)[47droot[47;13H8479[24G1  0 73251 22308   2 11:05 ?[47;60H00:00:00   /usr/libexec/packagekitd[48droot[48;13H8485[24G1  0 58625  8764   0 11:05 ?[48;60H00:00:00   /usr/libexec/polkitd --no-debug[49droot[12G21866[24G1  0  3859  8708   0 12:01 ?[49;60H00:00:00   sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups[50d[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;codeby@Faded-Chrysanthemum: ~[38;5;208m^G^[[39m(B[m[01;32mcodeby@Faded-Chrysanthemum[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~[38;5;208m^[[39m(B[m[00m$ ps -u codeby[51d[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[m    PID TTY[51;33HTIME CMD[52;5H431 ?[52;18H00:00:00 systemd[53;5H432 ?[53;18H00:00:00 (sd-pam)[54;5H437 pts/1    00:00:00 bash[2d[?12l[?25h[?25l[?12l[?25h[3d[?25l[?12l[?25h[4d[?25l[?12l[?25h[5d[?25l[?12l[?25h[6d[?25l[?12l[?25h[7d[?25l[?12l[?25h[8d[?25l[?12l[?25h[9d[?25l[?12l[?25h[10d[?25l[?12l[?25h[11d[?25l[?12l[?25h[12d[?25l[?12l[?25h[13d[?25l[?12l[?25h[14d[?25l[?12l[?25h[15d[?25l[?12l[?25h[16d[?25l[?12l[?25h[17d[?25l[?12l[?25h[18d[?25l[?12l[?25h[19d[?25l[?12l[?25h[20d[?25l[?12l[?25h[21d[?25l[55d[K[?12l[?25h[22d[?25l[?12l[?25h[23d[?25l[?12l[?25h[24d[?25l[?12l[?25h[25d[?25l[?12l[?25h[26d[?25l[?12l[?25h[27d[?25l[?12l[?25h[28d[?25l[?12l[?25h[29d[?25l[?12l[?25h[30d[?25l[?12l[?25h[31d[?25l[?12l[?25h[32d[?25l[?12l[?25h[33d[?25l[?12l[?25h[34d[?25l[?12l[?25h[35d[?25l[?12l[?25h[36d[?25l[?12l[?25h[37d[?25l[?12l[?25h[38d[?25l[?12l[?25h[39d[?25l[?12l[?25h[40d[?25l[?12l[?25h[41d[?25l[?12l[?25h[42d[?25l[?12l[?25h[43d[?25l[?12l[?25h[44d[?25l[?12l[?25h[45d[?25l[?12l[?25h[46d[?25l[?12l[?25h[47d[?25l[?12l[?25h[48d[?25l[?12l[?25h[49d[?25l[?12l[?25h[50d[?25l[?12l[?25h[51d[?25l[?12l[?25h[52d[?25l[?12l[?25h[53d[?25l[?12l[?25h[54d[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;4H1035 pts/0    00:00:00 bash[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;3H24451 pts/2    00:00:00 bash[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;3H43093 pts/2    00:00:00 top[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;3H43175 pts/3    00:00:00 bash[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;3H43236 pts/3    00:00:00 script[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;3H43237 pts/4    00:00:00 bash[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;3H43366 pts/4    00:00:00 ps[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;codeby@Faded-Chrysanthemum: ~[38;5;208m^G^[[39m(B[m[01;32mcodeby@Faded-Chrysanthemum[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~[38;5;208m^[[39m(B[m[00m$ top &[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[m[1] 43389[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;codeby@Faded-Chrysanthemum: ~[38;5;208m^G^[[39m(B[m[01;32mcodeby@Faded-Chrysanthemum[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~[38;5;208m^[[39m(B[m[00m$ [38;5;208m^[[39m(B[m[?1l[38;5;208m^[[39m(B[m>ps ki[38;5;208m^H^[[39m(B[m[K[38;5;208m^H^[[39m(B[m[Kstop 43389[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[merror: TTY could not be found[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1HUsage:[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;2Hps [options][?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;2HTry 'ps --help <simple|list|output|threads|misc|all>'[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;3Hor 'ps --help <s|l|o|t|m|a>'[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;2Hfor additional help text.[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1HFor more details see ps(1).[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[1]+  Stopped[54;31Htop[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;codeby@Faded-Chrysanthemum: ~[38;5;208m^G^[[39m(B[m[01;32mcodeby@Faded-Chrysanthemum[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~[38;5;208m^[[39m(B[m[00m$ exit[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[mexit[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1HThere are stopped jobs.[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;codeby@Faded-Chrysanthemum: ~[38;5;208m^G^[[39m(B[m[01;32mcodeby@Faded-Chrysanthemum[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~[38;5;208m^[[39m(B[m[00m$ ls[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M^[[39m(B[m[0m[38;5;208m^[[39m(B[m[01;34mcodeby-devops[38;5;208m^[[39m(B[m[0m  ps-log.txt[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;codeby@Faded-Chrysanthemum: ~[38;5;208m^G^[[39m(B[m[01;32mcodeby@Faded-Chrysanthemum[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~[38;5;208m^[[39m(B[m[00m$ cat ps-log.txt[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[mScript started on 2024-03-11 13:33:14+03:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="210" LINES="57"][?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;codeby@Faded-Chrysanthemum: ~[38;5;208m^G^[[39m(B[m[01;32mcodeby@Faded-Chrysanthemum[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~[38;5;208m^[[39m(B[m[00m$ ps -eFH[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[mUID[54;25HPID    PPID  C    SZ   RSS PSR STIME TTY[54;75HTIME CMD[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hroot[54;16H1[24G0  1 41798 12444   1 10:33 ?[54;60H00:03:07 /sbin/init[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hroot[54;16H2[24G1  0   570  1300   3 10:33 ?[54;60H00:00:00   /init[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hroot[54;16H7[24G2  0   581   132   1 10:33 ?[54;60H00:00:00     plan9 --control-socket 6 --log-level 4 --server-fd 7 --pipe-fd 9 --log-truncate[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hroot[54;14H397[24G2  0  1881  4976   2 10:33 pts/1    00:00:00     /bin/login -f[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hcodeby[14G437     397  0  1531  4816   0 10:33 pts/1    00:00:00[75G-bash[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hroot[54;13H1033[24G2  0   571   116   0 10:35 ?[54;60H00:00:00     /init[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hroot[54;13H1034    1033  0   575   120   0 10:35 ?[54;60H00:00:00[75G/init[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hcodeby[13G1035    1034  0  1652  5648   3 10:35 pts/0    00:00:00[54;77H-bash[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hroot[12G24445[24G2  0   571   116   1 12:12 ?[54;60H00:00:00     /init[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hroot[12G24446   24445  0   575   120   1 12:12 ?[54;60H00:00:00[75G/init[38;5;208m^M[39m(B[m[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1Hcodeby     24451   24446  0  1586  5364   2 12:12 pts/2[?25l[?12l[?25h7[2;55r8[55d
+[1;57r[54;1H[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[34d[?25l[?12l[?25h[35d[?25l[?12l[?25h[36d[?25l[?12l[?25h[37d[?25l[?12l[?25h[38d[?25l[?12l[?25h[39d[?25l[?12l[?25h[40d[?25l[?12l[?25h[41d[?25l[?12l[?25h[42d[?25l[?12
