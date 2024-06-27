@@ -1,0 +1,33 @@
+Script started on 2024-06-27 22:06:42+03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="205" LINES="59"]
+                                                                                                                                                                                                             ]0;kali@code: ~[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[1mj[0m[1mj[0m[38;2;153;153;153mava -version[39m[12D[1mj[39m[1ma[0m[1mj[1ma[39m[1mv[0m[0m[36mj[0m[36ma[0m[36mv[36ma[39m[39m [32m-[32mv[32me[32mr[32ms[32mi[32mo[32mn[39m[?1l>[?2004l
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+openjdk version "17.0.8" 2023-07-18
+OpenJDK Runtime Environment (build 17.0.8+7-Debian-1)
+OpenJDK 64-Bit Server VM (build 17.0.8+7-Debian-1, mixed mode, sharing)
+                                                                                                                                                                                                             ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4ms[24m[4ms[24m[38;2;153;153;153mudo dpkg -i jdk-22_linux-x64_bin.deb[39m[36D[24m[36ms[36mu[39m[39m[4ms[39m[4mu[39m[4md[24m[4m[32ms[4m[32mu[4m[32md[4m[32mo[24m[39m[39m [39m[4mu[24m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [31D[38;2;153;153;153mfw allow ssh[39m
+[K[A[10C[4mu[39m[4mp[24m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [1B[K[A[11C[4mp[4md[24m[4md[4ma[24m[4ma[4mt[24m[4mt[4me[24m[4me[4m-[24m[4m-[4ma[24m[4ma[4ml[24m[9D[24m[36mu[24m[36mp[24m[36md[24m[36ma[24m[36mt[24m[36me[24m[36m-[24m[36ma[24m[36ml[36mternatives[39m[1m [0m[0m [32m-[39m[32m-[32m-[39m[32m-[32mc[39m[32mc[32mo[39m[32mo[32mn[39m[32mn[32mf[39m[32mf[32mi[39m[32mi[32mg[39m [1mj[0m[1mj[1ma[0m[1ma[1mv[0m[1mv[1ma[0m[?1l>[?2004l[0mj[0ma[0mv[0ma[1B[sudo] password for kali: 
+There are 2 choices for the alternative java (providing /usr/bin/java).
+
+  Selection    Path                                         Priority   Status
+------------------------------------------------------------
+  0            /usr/lib/jvm/java-21-openjdk-arm64/bin/java   2111      auto mode
+* 1            /usr/lib/jvm/java-17-openjdk-arm64/bin/java   1711      manual mode
+  2            /usr/lib/jvm/java-21-openjdk-arm64/bin/java   2111      manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 2
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-arm64/bin/java to provide /usr/bin/java (java) in manual mode
+                                                                                                                                                                                                             ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[1mj[0m[1mj[0m[38;2;153;153;153mava -version[39m[12D[1mj[39m[1ma[0m[1mj[1ma[39m[1mv[0m[0m[36mj[0m[36ma[0m[36mv[36ma[39m[39m [32m-[32mv[32me[32mr[32ms[32mi[32mo[32mn[39m[?1l>[?2004l
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+openjdk version "21.0.3" 2024-04-16
+OpenJDK Runtime Environment (build 21.0.3+9-Debian-2)
+OpenJDK 64-Bit Server VM (build 21.0.3+9-Debian-2, mixed mode, sharing)
+                                                                                                                                                                                                             ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4me[24m[4me[24m[38;2;153;153;153mxit[39m[24m[36me[36mx[39m[39m[4me[39m[4mx[39m[4mi[24m[24m[36me[24m[36mx[24m[36mi[36mt[39m[?1l>[?2004l
+
+Script done on 2024-06-27 22:07:24+03:00 [COMMAND_EXIT_CODE="0"]
