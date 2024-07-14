@@ -1,0 +1,237 @@
+Script started on 2024-06-27 22:30:57+03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="205" LINES="59"]
+                                                                                                                                                                                                             ]0;kali@code: ~[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4ms[24m[4ms[24m[38;2;153;153;153mudo update-alternatives --config java[39m[37D[4ms[39m[4my[24m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [36D[4ms[4my[4ms[24m[4ms[4mt[24m[4mt[4me[24m[4me[4mm[24m[4mm[4mc[24m[4mc[4mt[24m[8D[24m[36ms[24m[36my[24m[36ms[24m[36mt[24m[36me[24m[36mm[24m[36mc[24m[36mt[36ml[39m[39m[4ms[39m[4ms[39m[4my[39m[4ms[39m[4mt[39m[4me[39m[4mm[39m[4mc[39m[4mt[4ml[24m[9D[4ms[4mu[4ms[4my[4ms[4mt[4me[4mm[4mc[4mt[4ml[24m[9D[4md[4ms[4my[4ms[4mt[4me[4mm[4mc[4mt[4ml[24m[9D[4mo[4ms[4my[4ms[4mt[4me[4mm[4mc[4mt[4ml[24m[9D[4m[32ms[4m[32mu[4m[32md[4m[32mo[24m[39m[24m [24m[36ms[24m[36my[24m[36ms[24m[36mt[24m[36me[24m[36mm[24m[36mc[24m[36mt[36ml[39m[9D[9C[38;2;153;153;153m status ssh[39m
+[K[A[9C[1B[K[A[10C[1C[1C[1C[1C[1C[1C[1C[1C[39m [39ms[39mt[39ma[39mt[39mu[39ms[39m [39ms[39ms[39mh[1B[K[A[29C[1B[K[A[29C [1B[K[A[28C[38;2;153;153;153mh[1B[39m[K[A[28C [39m [1B[K[A[27C[38;2;153;153;153msh[1B[39m[K[A[27C [39m [39m [1B[K[A[26C[38;2;153;153;153mssh[1B[39m[K[A[26C[39mn[39m [39m [1B[K[A[27Cginx[?1l>[?2004l[1B[sudo] password for kali: 
+[?1h=○ nginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://code/lib/systemd/system/nginx.service/lib/systemd/system/nginx.service]8;;; [0;1;38;5;185mdisabled[0m; preset: [0;1;38;5;185mdisabled[0m)[m
+     Active: inactive (dead)[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+[K[?1l>                                                                                                                                                                                                             ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4mc[24m[4mc[4ma[24m[38;2;153;153;153mt ps-log.txt[39m[12D[24m[36mc[24m[36ma[36mt[39m[39m [39m[1m[7m/[39m[1m[7ml[39m[1m[7mi[39m[1m[7mb[39m[1m[7m/[39m[1m[7ms[39m[1m[7my[39m[1m[7ms[39m[1m[7mt[39m[1m[7me[1m[7mmd/system/nginx.service[0m[27m[33D[27m[1m/[27m[1ml[27m[1mi[27m[1mb[27m[1m/[27m[1ms[27m[1my[27m[1ms[27m[1mt[27m[1me[27m[1mm[27m[1md[27m[1m/[27m[1ms[27m[1my[27m[1ms[27m[1mt[27m[1me[27m[1mm[27m[1m/[27m[1mn[27m[1mg[27m[1mi[27m[1mn[27m[1mx[27m[1m.[27m[1ms[27m[1me[27m[1mr[27m[1mv[27m[1mi[27m[1mc[27m[1me[0m[?1l>[?2004l
+# Stop dance for nginx
+# =======================
+#
+# ExecStop sends SIGQUIT (graceful stop) to the nginx process.
+# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control
+# and sends SIGTERM (fast shutdown) to the main process.
+# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends
+# SIGKILL to all the remaining processes in the process group (KillMode=mixed).
+#
+# nginx signals reference doc:
+# http://nginx.org/en/docs/control.html
+#
+[Unit]
+Description=A high performance web server and a reverse proxy server
+Documentation=man:nginx(8)
+After=network-online.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+PIDFile=/run/nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
+ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
+ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid
+TimeoutStopSec=5
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+                                                                                                                                                                                                             ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4mn[24m[4mn[4ma[24m[38;2;153;153;153mno ps-log.txt[39m[13D[4mn[4ma[39m[4mn[24m[24m[36mn[24m[36ma[24m[36mn[36mo[39m[39m [39m[1m[7m/[39m[1m[7ml[39m[1m[7mi[39m[1m[7mb[39m[1m[7m/[39m[1m[7ms[39m[1m[7my[39m[1m[7ms[39m[1m[7mt[39m[1m[7me[1m[7mmd/system/nginx.service[0m[27m[33D[27m[1m/[27m[1ml[27m[1mi[27m[1mb[27m[1m/[27m[1ms[27m[1my[27m[1ms[27m[1mt[27m[1me[27m[1mm[27m[1md[27m[1m/[27m[1ms[27m[1my[27m[1ms[27m[1mt[27m[1me[27m[1mm[27m[1m/[27m[1mn[27m[1mg[27m[1mi[27m[1mn[27m[1mx[27m[1m.[27m[1ms[27m[1me[27m[1mr[27m[1mv[27m[1mi[27m[1mc[27m[1me[0m[20D[0m/[0ml[0mi[0mb[0m/[0ms[0my[0ms[0mt[0me[0mm[0md[0m/[0ms[0my[0ms[0mt[0me[0mm[0m/[0mn[0mn[0mg[0mi[0mn[0mx[0m.[0ms[0me[0mr[0mv[0mi[0mce[13Denginx.service[13Dwnginx.service[13D[?1l>[?2004l
+[?2004h[?1049h[22;0;0t[1;59r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[57;78H(B[0;1m[37m[41m[ Directory '/lib/systemd/system' is not writable ][39;49m(B[m[H(B[0;7m  GNU nano 7.2                                                                         /lib/systemd/system/newnginx.service                                                                                  [1;204H(B[m[58d(B[0;7m^G(B[m Help[58;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[58;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[58;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[58;188H(B[0;7m^◂(B[m Prev Word[59d(B[0;7m^X(B[m Exit[59;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[59;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[59;120H(B[0;7mM-6(B[m Copy[59;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[59;171H(B[0;7m^F(B[m Forward[188G(B[0;7m^▸(B[m Next Word[2d[?12l[?25h[?25l[57d[J[59d[?12l[?25h[59;1H[?1049l[23;0;0t[?1l>[?2004l                                                                                                                                                                                                             ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[36mnano[39m /lib/systemd/system/newnginx.service[41D[39m[4ms[39m[4mn[39m[4ma[39m[4mn[4mo[24m /lib/systemd/system/newnginx.service[41D[4ms[4mu[4mn[4ma[4mn[4mo[24m /lib/systemd/system/newnginx.service[41D[4md[4mn[4ma[4mn[4mo[24m /lib/systemd/system/newnginx.service[41D[4mo[4mn[4ma[4mn[4mo[24m /lib/systemd/system/newnginx.service[41D[4m[32ms[4m[32mu[4m[32md[4m[32mo[24m[39m[24m [24m[36mn[24m[36ma[24m[36mn[36mo[39m /lib/systemd/system/newnginx.service[41D[?1l>[?2004l
+[?2004h[?1049h[22;0;0t[1;59r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[57;97H(B[0;7m[ New File ](B[m[H(B[0;7m  GNU nano 7.2                                                                         /lib/systemd/system/newnginx.service                                                                                  [1;204H(B[m[58d(B[0;7m^G(B[m Help[58;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[58;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[58;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[58;188H(B[0;7m^◂(B[m Prev Word[59d(B[0;7m^X(B[m Exit[59;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[59;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[59;120H(B[0;7mM-6(B[m Copy[59;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[59;171H(B[0;7m^F(B[m Forward[188G(B[0;7m^▸(B[m Next Word[2d[?12l[?25h[?25l[1;125H(B[0;7m*[57d(B[m[K[1;204H[2d[36m# Stop dance for nginx[3d# =======================[4d#[5d# ExecStop sends SIGQUIT (graceful stop) to the nginx process.[6d# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control[7d# and sends SIGTERM (fast shutdown) to the main process.[8d# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends[9d# SIGKILL to all the remaining processes in the process group (KillMode=mixed).[10d#[11d# nginx signals reference doc:[12d# http://nginx.org/en/docs/control.html[13d#[14d(B[0;1m[32m[Unit][15d[39m(B[mDescription=A high performance web server and a reverse proxy server[16dDocumentation=man:nginx(8)[17dAfter=network-online.target remote-fs.target nss-lookup.target[18dWants=network-online.target[20d(B[0;1m[32m[Service][21d[39m(B[mType=forking[22dPIDFile=/run/nginx.pid[23dExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'[24dExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'[25dExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload[26dExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid[27dTimeoutStopSec=5[28dKillMode=mixed[30d(B[0;1m[32m[Install][31d[39m(B[mWantedBy=multi-user.target[32d[?12l[?25h[?25l[57d(B[0;7mSave modified buffer?                                                                                                                                                                                        [58;1H Y(B[m Yes[K[59d(B[0;7m N(B[m No  [59;17H(B[0;7m^C(B[m Cancel[K[57;23H[?12l[?25h[?25l[58d(B[0;7m^G(B[m Help[58;52H(B[0;7mM-D(B[m DOS Format[58;103H(B[0;7mM-A(B[m Append[58;154H(B[0;7mM-B(B[m Backup File[59d(B[0;7m^C(B[m Cancel[17G         [59;52H(B[0;7mM-M(B[m Mac Format[59;103H(B[0;7mM-P(B[m Prepend[59;154H(B[0;7m^T(B[m Browse[57d(B[0;7mFile Name to Write: /lib/systemd/system/newnginx.service(B[m[?12l[?25h[?25l[57;95H[1K (B[0;7m[ Writing... ](B[m[K[1;125H(B[0;7m [204G(B[m[57;94H(B[0;7m[ Wrote 30 lines ](B[m[J[59d[?12l[?25h[59;1H[?1049l[23;0;0t[?1l>[?2004l                                                                                                                                                                                                             ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4ms[24m[4ms[24m[38;2;153;153;153mudo nano /lib/systemd/system/newnginx.service[39m[45D[24m[36ms[36mu[39m[39m[4ms[39m[4mu[39m[4md[24m[4m[32ms[4m[32mu[4m[32md[4m[32mo[24m[39m[39m [39m[4ms[24m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [40D[38;2;153;153;153mystemctl status nginx[39m[21D[4ms[39m[4my[24m[4my[39m[4ms[24m[4ms[39m[4mt[24m[4mt[39m[4me[24m[4me[39m[4mm[24m[4mm[39m[4mc[24m[4mc[39m[4mt[24m[8D[24m[36ms[24m[36my[24m[36ms[24m[36mt[24m[36me[24m[36mm[24m[36mc[24m[36mt[36ml[39m[39m [39md[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [11Daemon-reload[?1l>[?2004l
+                                                                                                                                                                                                             ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4ms[24m[4ms[24m[38;2;153;153;153mudo systemctl daemon-reload[39m[27D[24m[36ms[36mu[39m[39m[4ms[39m[4mu[39m[4md[24m[4m[32ms[4m[32mu[4m[32md[4m[32mo[24m[39m[39m [39m[4mC[24m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [22D[24m [38;2;153;153;153msystemctl daemon-reload[39m[23D[39m[4ms[24m[A[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [4m[32msudo[24m[39m [4ms[24m[38;2;153;153;153mystemctl daemon-reload[39m[22D[24m[36ms[36my[36ms[36mt[36me[36mm[36mc[36mt[36ml[39m[39m [39md[39ma[39me[39mm[39mo[39mn[39m-[39mr[39me[39ml[39mo[39ma[39md [38;2;153;153;153md[39m [39m [38;2;153;153;153mad[39m [39m [39m [38;2;153;153;153moad[39m [39m [39m [39m [38;2;153;153;153mload[39m [39m [39m [39m [39m [38;2;153;153;153meload[39m [39m [39m [39m [39m [39m [38;2;153;153;153mreload[39m [39m [39m [39m [39m [39m [39m [38;2;153;153;153m-reload[39m [39m [39m [39m [39m [39m [39m [39m [8D[38;2;153;153;153mn-reload[39m[8D [39m [39m [39m [39m [39m [39m [39m [39m [9D[38;2;153;153;153mon-reload[39m[9D [39m [39m [39m [39m [39m [39m [39m [39m [39m [10D[38;2;153;153;153mmon-reload[39m[10D [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [11D[38;2;153;153;153memon-reload[39m[11D [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [12D[38;2;153;153;153maemon-reload[39m[12D [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [13D[38;2;153;153;153mdaemon-reload[39m[13D[39ms[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [12D[38;2;153;153;153mtatus nginx[39m[11D[39mt[39ma[39mr[39m [39m [39m [39m [39m [39m [39m [39m [8D[38;2;153;153;153mt ssh[39m
+[K[A[23C[39mt[1B[K[A[24C[39m [39mn[39m [39m [1B[K[A[26Cewnginx .service[?1l>[?2004l[1B[0;1;31mJob for newnginx.service failed because the control process exited with error code.[0m
+[0;1;31mSee "systemctl status newnginx.service" and "journalctl -xeu newnginx.service" for details.[0m
+                                                                                                     ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4ms[24m[4ms[24m[38;2;153;153;153mudo systemctl start newnginx.service[39m[36D[24m[36ms[36mu[39m[39m[4ms[39m[4mu[39m[4md[24m[4m[32ms[4m[32mu[4m[32md[4m[32mo[24m[39m[39m [7m[36ms[7m[36my[7m[36ms[7m[36mt[7m[36me[7m[36mm[7m[36mc[7m[36mt[7m[36ml[39m[39m[7m [39m[7ms[39m[7mt[39m[7ma[39m[7mt[39m[7mu[39m[7ms[39m[7m [39m[7mn[39m[7me[39m[7mw[39m[7mn[39m[7mg[39m[7mi[39m[7mn[39m[7mx[39m[7m.[39m[7ms[39m[7me[39m[7mr[39m[7mv[39m[7mi[39m[7mc[7me[27m[33D[27m[36ms[27m[36my[27m[36ms[27m[36mt[27m[36me[27m[36mm[27m[36mc[27m[36mt[27m[36ml[39m[27m [27ms[27mt[27ma[27mt[27mu[27ms[27m [27mn[27me[27mw[27mn[27mg[27mi[27mn[27mx[27m.[27ms[27me[27mr[27mv[27mi[27mc[27me[?1l>[?2004l
+[?1h=[0;1;31m×[0m newnginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://code/lib/systemd/system/newnginx.service/lib/systemd/system/newnginx.service]8;;; [0;1;38;5;185mdisabled[0m; preset: [0;1;38;5;185mdisabled[0m)[m
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Thu 2024-06-27 22:38:34 EAT; 1min 4s ago[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+    Process: 28529 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; [0;1;31m(code=exited,[m[7m>[27m
+        CPU: 835us[m
+[m
+Jun 27 22:38:34 code systemd[1]: Starting newnginx.service - A high performance web server and a rev[m[7m>[27m
+Jun 27 22:38:34 code (nginx)[28529]: newnginx.service: Failed to locate executable /usr/sbin/nginx: [m[7m>[27m
+Jun 27 22:38:34 code (nginx)[28529]: [0;1;31m[0;1;39m[0;1;31mnewnginx.service: Failed at step EXEC spawning /usr/sbin/nginx:[m[7m>[27m
+Jun 27 22:38:34 code systemd[1]: [0;1;39m[0;1;31m[0;1;39mnewnginx.service: Control process exited, code=exited, status=203/E[m[7m>[27m
+Jun 27 22:38:34 code systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mnewnginx.service: Failed with result 'exit-code'.[0m[m
+Jun 27 22:38:34 code systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start newnginx.service - A high performance web server an[m[7m>[27m
+[7mlines 1-13/13 (END)[27m[K[H[2J[H[H[2J[H[0;1;31m×[0m newnginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://code/lib/systemd/system/newnginx.service/lib/systemd/system/newnginx.service]8;;; [0;1;38;5;185mdisabled[0m; preset: [0;1;38;5;185mdisabled[0m)[m
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Thu 2024-06-27 22:38:34 EAT; 1min 4s ago[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+    Process: 28529 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; [0;1;31m(code=exited, status=203/EXEC)[0m[m
+        CPU: 835us[m
+[m
+Jun 27 22:38:34 code systemd[1]: Starting newnginx.service - A high performance web server and a reverse proxy server...[m
+Jun 27 22:38:34 code (nginx)[28529]: newnginx.service: Failed to locate executable /usr/sbin/nginx: No such file or directory[m
+Jun 27 22:38:34 code (nginx)[28529]: [0;1;31m[0;1;39m[0;1;31mnewnginx.service: Failed at step EXEC spawning /usr/sbin/nginx: No such file or directory[0m[m
+Jun 27 22:38:34 code systemd[1]: [0;1;39m[0;1;31m[0;1;39mnewnginx.service: Control process exited, code=exited, status=203/EXEC[0m[m
+Jun 27 22:38:34 code systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mnewnginx.service: Failed with result 'exit-code'.[0m[m
+Jun 27 22:38:34 code systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start newnginx.service - A high performance web server and a reverse proxy server.[0m[m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[7mlines 1-13/13 (END)[27m[K[K[?1l>                                                                                                                                                                                 ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[?1l>[?2004l
+                                                                                                                                                                                 ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4ms[24m[4ms[24m[38;2;153;153;153mudo systemctl status newnginx.service[39m[37D[24m[36ms[36mu[39m[39m[4ms[39m[4mu[39m[4md[24m[4m[32ms[4m[32mu[4m[32md[4m[32mo[24m[39m[39m [36ms[36my[36ms[36mt[36me[36mm[36mc[36mt[36ml[39m[39m [39ms[39mt[39ma[39mt[39mu[39ms[39m [39mn[39me[39mw[39mn[39mg[39mi[39mn[39mx[39m.[39ms[39me[39mr[39mv[39mi[39mc[39me[1C[P[13C [14D[P[13C [14D[P[12C [14D[?1l>[?2004l
+[?1h=○ nginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://code/lib/systemd/system/nginx.service/lib/systemd/system/nginx.service]8;;; [0;1;38;5;185mdisabled[0m; preset: [0;1;38;5;185mdisabled[0m)[m
+     Active: inactive (dead)[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+[K[?1l>                                                                                                                                                                                 ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4m[32msudo[24m[39m [36msystemctl[39m status nginx.service[12Dewnginx.service[?1l>[?2004l
+[?1h=[0;1;31m×[0m newnginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://code/lib/systemd/system/newnginx.service/lib/systemd/system/newnginx.service]8;;; [0;1;38;5;185mdisabled[0m; preset: [0;1;38;5;185mdisabled[0m)[m
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Thu 2024-06-27 22:38:34 EAT; 1min 58s ago[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+    Process: 28529 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; [0;1;31m(code=exited, status=203/EXEC)[0m[m
+        CPU: 835us[m
+[m
+Jun 27 22:38:34 code systemd[1]: Starting newnginx.service - A high performance web server and a reverse proxy server...[m
+Jun 27 22:38:34 code (nginx)[28529]: newnginx.service: Failed to locate executable /usr/sbin/nginx: No such file or directory[m
+Jun 27 22:38:34 code (nginx)[28529]: [0;1;31m[0;1;39m[0;1;31mnewnginx.service: Failed at step EXEC spawning /usr/sbin/nginx: No such file or directory[0m[m
+Jun 27 22:38:34 code systemd[1]: [0;1;39m[0;1;31m[0;1;39mnewnginx.service: Control process exited, code=exited, status=203/EXEC[0m[m
+Jun 27 22:38:34 code systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mnewnginx.service: Failed with result 'exit-code'.[0m[m
+Jun 27 22:38:34 code systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start newnginx.service - A high performance web server and a reverse proxy server.[0m[m
+[K[?1l>                                                                                                                                                                                 ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4ms[24m[4ms[24m[38;2;153;153;153mudo systemctl status newnginx.service[39m[37D[24m[36ms[36mu[39m[39m[4ms[39m[4mu[39m[4md[24m[4m[32ms[4m[32mu[4m[32md[4m[32mo[24m[39m[39m [39m[4ma[24m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [32D[38;2;153;153;153mpt install ./jdk-22_linux-x64_bin.deb[39m[37D[4ma[39m[4mp[24m[24m[36ma[24m[36mp[36mt[39m[39m[4ma[39m[4mp[39m[4mt[39m[4m-[24m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [34D[38;2;153;153;153mget install openssh-server[39m
+[K[A[13C[4m-[39m[4mg[24m[1B[K[A[14C[4mg[39m[4me[24m[24m[36ma[24m[36mp[24m[36mt[24m[36m-[24m[36mg[24m[36me[36mt[39m[39m [39mi[39mn[39mC[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [1B[K[A[20C [38;2;153;153;153mstall openssh-server[1B[39m[K[A[19C[39ms[1B[K[A[20C[39mt[39ma[39ml[39ml[39m [39mn[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [1B[K[A[26Cginx[?1l>[?2004l[1BReading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 0%Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  ettercap-common ettercap-graphical fonts-noto-color-emoji libapache2-mod-php libfcgi-bin libluajit-5.1-2 libluajit-5.1-common libnsl-dev libregexp-assemble-perl libtirpc-dev
+  python3-qrcode
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  nginx-common
+Suggested packages:
+  fcgiwrap nginx-doc
+The following NEW packages will be installed:
+  nginx
+The following packages will be upgraded:
+  nginx-common
+1 upgraded, 1 newly installed, 0 to remove and 1827 not upgraded.
+Need to get 606 kB of archives.
+After this operation, 1366 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+0% [Working]0% [Working]0% [Connecting to kali.download]                                Get:1 http://kali.download/kali kali-rolling/main arm64 nginx-common all 1.26.0-1 [108 kB]
+4% [1 nginx-common 32.3 kB/108 kB 30%]                                      24% [Working]             Get:2 http://kali.download/kali kali-rolling/main arm64 nginx arm64 1.26.0-1 [499 kB]
+33% [2 nginx 68.0 kB/499 kB 14%]                                100% [Working]              Fetched 606 kB in 1s (589 kB/s)
+Preconfiguring packages ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 394031 files and directories currently installed.)
+Preparing to unpack .../nginx-common_1.26.0-1_all.deb ...
+Unpacking nginx-common (1.26.0-1) over (1.24.0-1) ...
+Selecting previously unselected package nginx.
+Preparing to unpack .../nginx_1.26.0-1_arm64.deb ...
+Unpacking nginx (1.26.0-1) ...
+Setting up nginx (1.26.0-1) ...
+Setting up nginx-common (1.26.0-1) ...
+Installing new version of config file /etc/nginx/mime.types ...
+Installing new version of config file /etc/nginx/nginx.conf ...
+Installing new version of config file /etc/ufw/applications.d/nginx ...
+nginx.service is a disabled or a static unit not running, not starting it.
+Processing triggers for man-db (2.11.2-3) ...
+Processing triggers for kali-menu (2023.4.3) ...
+                                                                                                                                                                                 ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4m[32msudo[24m[39m [36mapt-get[39m install nginx[21D[36ms[36my[36ms[36mt[36me[36mm[36mc[36mt[36ml[39m [3Ctus newnginx.service[P[13C [14D[P[13C [14D[P[12C [14D[?1l>[?2004l
+[?1h=○ nginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://code/lib/systemd/system/nginx.service/lib/systemd/system/nginx.service]8;;; [0;1;38;5;185mdisabled[0m; preset: [0;1;38;5;185mdisabled[0m)[m
+     Active: inactive (dead)[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+[K[?1l>                                                                                                                                                                                 ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4m[32msudo[24m[39m [36msystemctl[39m status nginx.service[18D[36ma[36mp[36mt[36m-[36mg[36me[36mt[39m[39m [39min[3Cll nginx         [9D[21D[36ms[36my[36ms[36mt[36me[36mm[36mc[36mt[36ml[39m [3Ctus newnginx.service[15D[3P[12C   [12Dewnginx.service[20Drt[P[17C [22Ddaemon-reload         [9D[13Dstart newnginx.service[?1l>[?2004l
+                                                                                                                                                                                 ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4m[32msudo[24m[39m [36msystemctl[39m start newnginx.service[19Dtus [P[P[13C  [1Cnginx.service[13Denginx.service[13Dwnginx.service[13D[?1l>[?2004l
+[?1h=[0;1;32m●[0m newnginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://code/lib/systemd/system/newnginx.service/lib/systemd/system/newnginx.service]8;;; [0;1;38;5;185mdisabled[0m; preset: [0;1;38;5;185mdisabled[0m)[m
+     Active: [0;1;32mactive (running)[0m since Thu 2024-06-27 22:41:23 EAT; 8s ago[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+    Process: 30199 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)[m
+    Process: 30201 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)[m
+   Main PID: 30202 (nginx)[m
+      Tasks: 9 (limit: 4549)[m
+     Memory: 6.8M[m
+        CPU: 19ms[m
+     CGroup: /system.slice/newnginx.service[m
+             ├─[0;38;5;245m30202 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"[0m[m
+             ├─[0;38;5;245m30203 "nginx: worker process"[0m[m
+             ├─[0;38;5;245m30204 "nginx: worker process"[0m[m
+             ├─[0;38;5;245m30205 "nginx: worker process"[0m[m
+             ├─[0;38;5;245m30206 "nginx: worker process"[0m[m
+             ├─[0;38;5;245m30207 "nginx: worker process"[0m[m
+             ├─[0;38;5;245m30208 "nginx: worker process"[0m[m
+             ├─[0;38;5;245m30209 "nginx: worker process"[0m[m
+             └─[0;38;5;245m30210 "nginx: worker process"[0m[m
+[m
+Jun 27 22:41:23 code systemd[1]: Starting newnginx.service - A high performance web server and a reverse proxy server...[m
+Jun 27 22:41:23 code systemd[1]: Started newnginx.service - A high performance web server and a reverse proxy server.[m
+[K[?1l>                                                                                                                                                                                 ]0;kali@code: ~
+[0m[27m[24m[J[32m┌──([1m[32m[34mkali㉿code[0m[34m[32m)-[[1m[32m[39m~[0m[32m]
+└─[1m[32m[34m$[0m[34m[39m [K[?1h=[?2004h[4me[24m[4me[24m[38;2;153;153;153mxit[39m[24m[36me[36mx[39m[39m[4me[39m[4mx[39m[4mi[24m[24m[36me[24m[36mx[24m[36mi[36mt[39m[?1l>[?2004l
+
+Script done on 2024-06-27 22:41:36+03:00 [COMMAND_EXIT_CODE="0"]
