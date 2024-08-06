@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "server" do |server|
+    server.vm.box = "spox/ubuntu-arm"
+    server.vm.box_version = "1.0.0"
+    server.vm.box_check_update = false
+    server.vm.hostname = "server"
+    server.vm.define "server"
+    server.vm.network "private_network", ip: "172.17.177.22"
+    server.vm.provision "shell", inline: <<-SHELL
+      mkdir /home/vagrant/new_ssh_keys
+      ssh-keygen -t rsa -b 2048 -f /home/vagrant/new_ssh_keys/id_rsa -N ""
+      cp /home/vagrant/new_ssh_keys/id_rsa /vagrant/.vagrant/server_priv_key
+      cat /home/vagrant/new_ssh_keys/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
+    SHELL
+  end
+
+  config.vm.define "client" do |client|
+    client.vm.box = "spox/ubuntu-arm"
+    client.vm.box_version = "1.0.0"
+    client.vm.box_check_update = false
+    client.vm.hostname = "client"
+    client.vm.define "client"
+    client.vm.network "private_network", ip: "172.17.177.21"
+    client.vm.provision "shell", inline: <<-SHELL
+      cp /vagrant/.vagrant/server_priv_key /home/vagrant/server_priv_key
+    SHELL
+  end
+
+end
