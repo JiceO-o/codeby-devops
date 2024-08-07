@@ -1,0 +1,589 @@
+Script started on 2024-08-07 00:56:44+03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="200" LINES="51"]
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# [7mlxc launch ubuntu:18.04 contapache[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clxc launch ubuntu:18.04 contapache
+[?2004lCreating contapache
+
+Error: Failed instance creation: Failed creating instance record: Instance is busy running a "create" operation
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# 
+[?2004l[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# lxc launch ubuntu:18.04 contapache[1Papache
+[?2004lCreating conapache
+Retrieving image: Unpack: 100% (2.39GB/s)                                          Retrieving image: Unpack: 100% (2.39GB/s)                                          Starting conapache
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# [7mlxc list[27mlxc list
+[?2004lbash: /snap/bin/lxc: No such file or directory
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# lxc
+[?2004lDescription:
+  Command line client for LXD
+
+  All of LXD's features can be driven through the various commands below.
+  For help with any of those, simply call them with --help.
+
+Usage:
+  lxc [command]
+
+Available Commands:
+  alias       Manage command aliases
+  cluster     Manage cluster members
+  config      Manage instance and server configuration options
+  console     Attach to instance consoles
+  copy        Copy instances within or in between LXD servers
+  delete      Delete instances and snapshots
+  exec        Execute commands in instances
+  export      Export instance backups
+  file        Manage files in instances
+  help        Help about any command
+  image       Manage images
+  import      Import instance backups
+  info        Show instance or server information
+  init        Create instances from images
+  launch      Create and start instances from images
+  list        List instances
+  monitor     Monitor a local or remote LXD server
+  move        Move instances within or in between LXD servers
+  network     Manage and attach instances to networks
+  operation   List, show and delete background operations
+  pause       Pause instances
+  profile     Manage profiles
+  project     Manage projects
+  publish     Publish instances as images
+  query       Send a raw query to LXD
+  remote      Manage the list of remote servers
+  rename      Rename instances and snapshots
+  restart     Restart instances
+  restore     Restore instances from snapshots
+  snapshot    Create instance snapshots
+  start       Start instances
+  stop        Stop instances
+  storage     Manage storage pools and volumes
+  version     Show local and remote versions
+  warning     Manage warnings
+
+Flags:
+      --all            Show less common commands
+      --debug          Show all debug messages
+      --force-local    Force using the local unix socket
+  -h, --help           Print help
+      --project        Override the source project
+  -q, --quiet          Don't show progress information
+      --sub-commands   Use with help or --help to view sub-commands
+  -v, --verbose        Show all information messages
+      --version        Print version number
+
+Use "lxc [command] --help" for more information about a command.
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# lxc list
+[?2004l+------------+---------+----------------------+-----------------------------------------------+-----------+-----------+
+|    NAME    |  STATE  |         IPV4         |                     IPV6                      |   TYPE    | SNAPSHOTS |
++------------+---------+----------------------+-----------------------------------------------+-----------+-----------+
+| conapache  | RUNNING | 10.147.29.129 (eth0) | fd42:fbb8:5653:b725:216:3eff:fe3a:77b7 (eth0) | CONTAINER | 0         |
++------------+---------+----------------------+-----------------------------------------------+-----------+-----------+
+| contapache | STOPPED |                      |                                               | CONTAINER | 0         |
++------------+---------+----------------------+-----------------------------------------------+-----------+-----------+
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# [7miptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.59.26.40:8080[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ciptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.59.26.40:8080[1P:8080[1P:8080[1P:8080[1P:8080[1P:8080[1P:8080[1P:8080[1P:80801:80804:80807:8080.:80802:80809:8080.:80801:80802:80809:8080
+[?2004l[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# [7mlxc exec contapache /bin/bash[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clxc exec contapache /bin/bash
+[?2004lError: Instance is not running
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# lxc exec contapache /bin/bash[1P
+[?2004l]0;root@conapache: ~root@conapache:~# apt-get install apache2
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 6%Reading package lists... 6%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 10%Reading package lists... 29%Reading package lists... 29%Reading package lists... 43%Reading package lists... 43%Reading package lists... 52%Reading package lists... 52%Reading package lists... 56%Reading package lists... 56%Reading package lists... 73%Reading package lists... 73%Reading package lists... 86%Reading package lists... 86%Reading package lists... 95%Reading package lists... 95%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  efibootmgr libefiboot1 libefivar1 libfreetype6
+Use 'apt autoremove' to remove them.
+The following additional packages will be installed:
+  apache2-bin apache2-data apache2-utils libapr1 libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.2-0 ssl-cert
+Suggested packages:
+  www-browser apache2-doc apache2-suexec-pristine | apache2-suexec-custom openssl-blacklist
+The following NEW packages will be installed:
+  apache2 apache2-bin apache2-data apache2-utils libapr1 libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.2-0 ssl-cert
+0 upgraded, 10 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1730 kB of archives.
+After this operation, 7000 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu bionic/main amd64 libapr1 amd64 1.6.3-2 [90.9 kB]
+0% [1 libapr1 0 B/90.9 kB 0%]                             6% [Working]            Get:2 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 libaprutil1 amd64 1.6.1-2ubuntu0.1 [84.6 kB]
+6% [2 libaprutil1 0 B/84.6 kB 0%]                                 12% [Working]             Get:3 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 libaprutil1-dbd-sqlite3 amd64 1.6.1-2ubuntu0.1 [10.6 kB]
+12% [3 libaprutil1-dbd-sqlite3 0 B/10.6 kB 0%]                                              15% [Working]             Get:4 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 libaprutil1-ldap amd64 1.6.1-2ubuntu0.1 [8752 B]
+15% [4 libaprutil1-ldap 0 B/8752 B 0%]                                      17% [Working]             Get:5 http://archive.ubuntu.com/ubuntu bionic/main amd64 liblua5.2-0 amd64 5.2.4-1.1build1 [108 kB]
+17% [5 liblua5.2-0 0 B/108 kB 0%]                                 24% [Working]             Get:6 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 apache2-bin amd64 2.4.29-1ubuntu4.27 [1071 kB]
+24% [6 apache2-bin 0 B/1071 kB 0%]                                  76% [Working]             Get:7 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 apache2-utils amd64 2.4.29-1ubuntu4.27 [83.3 kB]
+76% [7 apache2-utils 0 B/83.3 kB 0%]                                    81% [Working]             Get:8 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 apache2-data all 2.4.29-1ubuntu4.27 [160 kB]
+81% [8 apache2-data 0 B/160 kB 0%]                                  91% [Working]             Get:9 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 apache2 amd64 2.4.29-1ubuntu4.27 [95.1 kB]
+91% [9 apache2 0 B/95.1 kB 0%]                              97% [Working]             Get:10 http://archive.ubuntu.com/ubuntu bionic/main amd64 ssl-cert all 1.0.39 [17.0 kB]
+97% [10 ssl-cert 0 B/17.0 kB 0%]                                100% [Working]              Fetched 1730 kB in 1s (2136 kB/s)
+Preconfiguring packages ...
+Selecting previously unselected package libapr1:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 29233 files and directories currently installed.)
+Preparing to unpack .../0-libapr1_1.6.3-2_amd64.deb ...
+Unpacking libapr1:amd64 (1.6.3-2) ...
+Selecting previously unselected package libaprutil1:amd64.
+Preparing to unpack .../1-libaprutil1_1.6.1-2ubuntu0.1_amd64.deb ...
+Unpacking libaprutil1:amd64 (1.6.1-2ubuntu0.1) ...
+Selecting previously unselected package libaprutil1-dbd-sqlite3:amd64.
+Preparing to unpack .../2-libaprutil1-dbd-sqlite3_1.6.1-2ubuntu0.1_amd64.deb ...
+Unpacking libaprutil1-dbd-sqlite3:amd64 (1.6.1-2ubuntu0.1) ...
+Selecting previously unselected package libaprutil1-ldap:amd64.
+Preparing to unpack .../3-libaprutil1-ldap_1.6.1-2ubuntu0.1_amd64.deb ...
+Unpacking libaprutil1-ldap:amd64 (1.6.1-2ubuntu0.1) ...
+Selecting previously unselected package liblua5.2-0:amd64.
+Preparing to unpack .../4-liblua5.2-0_5.2.4-1.1build1_amd64.deb ...
+Unpacking liblua5.2-0:amd64 (5.2.4-1.1build1) ...
+Selecting previously unselected package apache2-bin.
+Preparing to unpack .../5-apache2-bin_2.4.29-1ubuntu4.27_amd64.deb ...
+Unpacking apache2-bin (2.4.29-1ubuntu4.27) ...
+Selecting previously unselected package apache2-utils.
+Preparing to unpack .../6-apache2-utils_2.4.29-1ubuntu4.27_amd64.deb ...
+Unpacking apache2-utils (2.4.29-1ubuntu4.27) ...
+Selecting previously unselected package apache2-data.
+Preparing to unpack .../7-apache2-data_2.4.29-1ubuntu4.27_all.deb ...
+Unpacking apache2-data (2.4.29-1ubuntu4.27) ...
+Selecting previously unselected package apache2.
+Preparing to unpack .../8-apache2_2.4.29-1ubuntu4.27_amd64.deb ...
+Unpacking apache2 (2.4.29-1ubuntu4.27) ...
+Selecting previously unselected package ssl-cert.
+Preparing to unpack .../9-ssl-cert_1.0.39_all.deb ...
+Unpacking ssl-cert (1.0.39) ...
+Setting up libapr1:amd64 (1.6.3-2) ...
+Setting up apache2-data (2.4.29-1ubuntu4.27) ...
+Setting up ssl-cert (1.0.39) ...
+Setting up libaprutil1:amd64 (1.6.1-2ubuntu0.1) ...
+Setting up liblua5.2-0:amd64 (5.2.4-1.1build1) ...
+Setting up libaprutil1-ldap:amd64 (1.6.1-2ubuntu0.1) ...
+Setting up libaprutil1-dbd-sqlite3:amd64 (1.6.1-2ubuntu0.1) ...
+Setting up apache2-utils (2.4.29-1ubuntu4.27) ...
+Setting up apache2-bin (2.4.29-1ubuntu4.27) ...
+Setting up apache2 (2.4.29-1ubuntu4.27) ...
+Enabling module mpm_event.
+Enabling module authz_core.
+Enabling module authz_host.
+Enabling module authn_core.
+Enabling module auth_basic.
+Enabling module access_compat.
+Enabling module authn_file.
+Enabling module authz_user.
+Enabling module alias.
+Enabling module dir.
+Enabling module autoindex.
+Enabling module env.
+Enabling module mime.
+Enabling module negotiation.
+Enabling module setenvif.
+Enabling module filter.
+Enabling module deflate.
+Enabling module status.
+Enabling module reqtimeout.
+Enabling conf charset.
+Enabling conf localized-error-pages.
+Enabling conf other-vhosts-access-log.
+Enabling conf security.
+Enabling conf serve-cgi-bin.
+Enabling site 000-default.
+Created symlink /etc/systemd/system/multi-user.target.wants/apache2.service → /lib/systemd/system/apache2.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/apache-htcacheclean.service → /lib/systemd/system/apache-htcacheclean.service.
+Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
+Processing triggers for systemd (237-3ubuntu10.57) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for ufw (0.36-0ubuntu0.18.04.2) ...
+Processing triggers for ureadahead (0.100.0-21) ...
+]0;root@conapache: ~root@conapache:~# systemctl status apache2
+[?1h=[0;1;32m●[0m apache2.service - The Apache HTTP Server[m
+   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)[m
+  Drop-In: /lib/systemd/system/apache2.service.d[m
+           └─apache2-systemd.conf[m
+   Active: [0;1;32mactive (running)[0m since Tue 2024-08-06 22:01:10 UTC; 19s ago[m
+ Main PID: 942 (apache2)[m
+    Tasks: 55 (limit: 1067)[m
+   CGroup: /system.slice/apache2.service[m
+           ├─942 /usr/sbin/apache2 -k start[m
+           ├─944 /usr/sbin/apache2 -k start[m
+           └─945 /usr/sbin/apache2 -k start[m
+[m
+Aug 06 22:01:10 conapache systemd[1]: Starting The Apache HTTP Server...[m
+Aug 06 22:01:10 conapache systemd[1]: Started The Apache HTTP Server.[m
+[K[?1l>]0;root@conapache: ~root@conapache:~# exit
+exit
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# lxc list
+[?2004l+------------+---------+----------------------+-----------------------------------------------+-----------+-----------+
+|    NAME    |  STATE  |         IPV4         |                     IPV6                      |   TYPE    | SNAPSHOTS |
++------------+---------+----------------------+-----------------------------------------------+-----------+-----------+
+| conapache  | RUNNING | 10.147.29.129 (eth0) | fd42:fbb8:5653:b725:216:3eff:fe3a:77b7 (eth0) | CONTAINER | 0         |
++------------+---------+----------------------+-----------------------------------------------+-----------+-----------+
+| contapache | STOPPED |                      |                                               | CONTAINER | 0         |
++------------+---------+----------------------+-----------------------------------------------+-----------+-----------+
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# curl http://10.147.29.129
+[?2004l
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!--
+    Modified from the Debian original for Ubuntu
+    Last updated: 2016-11-16
+    See: https://launchpad.net/bugs/1288690
+  -->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Apache2 Ubuntu Default Page: It works</title>
+    <style type="text/css" media="screen">
+  * {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+  }
+
+  body, html {
+    padding: 3px 3px 3px 3px;
+
+    background-color: #D8DBE2;
+
+    font-family: Verdana, sans-serif;
+    font-size: 11pt;
+    text-align: center;
+  }
+
+  div.main_page {
+    position: relative;
+    display: table;
+
+    width: 800px;
+
+    margin-bottom: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 0px 0px 0px;
+
+    border-width: 2px;
+    border-color: #212738;
+    border-style: solid;
+
+    background-color: #FFFFFF;
+
+    text-align: center;
+  }
+
+  div.page_header {
+    height: 99px;
+    width: 100%;
+
+    background-color: #F5F6F7;
+  }
+
+  div.page_header span {
+    margin: 15px 0px 0px 50px;
+
+    font-size: 180%;
+    font-weight: bold;
+  }
+
+  div.page_header img {
+    margin: 3px 0px 0px 40px;
+
+    border: 0px 0px 0px;
+  }
+
+  div.table_of_contents {
+    clear: left;
+
+    min-width: 200px;
+
+    margin: 3px 3px 3px 3px;
+
+    background-color: #FFFFFF;
+
+    text-align: left;
+  }
+
+  div.table_of_contents_item {
+    clear: left;
+
+    width: 100%;
+
+    margin: 4px 0px 0px 0px;
+
+    background-color: #FFFFFF;
+
+    color: #000000;
+    text-align: left;
+  }
+
+  div.table_of_contents_item a {
+    margin: 6px 0px 0px 6px;
+  }
+
+  div.content_section {
+    margin: 3px 3px 3px 3px;
+
+    background-color: #FFFFFF;
+
+    text-align: left;
+  }
+
+  div.content_section_text {
+    padding: 4px 8px 4px 8px;
+
+    color: #000000;
+    font-size: 100%;
+  }
+
+  div.content_section_text pre {
+    margin: 8px 0px 8px 0px;
+    padding: 8px 8px 8px 8px;
+
+    border-width: 1px;
+    border-style: dotted;
+    border-color: #000000;
+
+    background-color: #F5F6F7;
+
+    font-style: italic;
+  }
+
+  div.content_section_text p {
+    margin-bottom: 6px;
+  }
+
+  div.content_section_text ul, div.content_section_text li {
+    padding: 4px 8px 4px 16px;
+  }
+
+  div.section_header {
+    padding: 3px 6px 3px 6px;
+
+    background-color: #8E9CB2;
+
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 112%;
+    text-align: center;
+  }
+
+  div.section_header_red {
+    background-color: #CD214F;
+  }
+
+  div.section_header_grey {
+    background-color: #9F9386;
+  }
+
+  .floating_element {
+    position: relative;
+    float: left;
+  }
+
+  div.table_of_contents_item a,
+  div.content_section_text a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  div.table_of_contents_item a:link,
+  div.table_of_contents_item a:visited,
+  div.table_of_contents_item a:active {
+    color: #000000;
+  }
+
+  div.table_of_contents_item a:hover {
+    background-color: #000000;
+
+    color: #FFFFFF;
+  }
+
+  div.content_section_text a:link,
+  div.content_section_text a:visited,
+   div.content_section_text a:active {
+    background-color: #DCDFE6;
+
+    color: #000000;
+  }
+
+  div.content_section_text a:hover {
+    background-color: #000000;
+
+    color: #DCDFE6;
+  }
+
+  div.validator {
+  }
+    </style>
+  </head>
+  <body>
+    <div class="main_page">
+      <div class="page_header floating_element">
+        <img src="/icons/ubuntu-logo.png" alt="Ubuntu Logo" class="floating_element"/>
+        <span class="floating_element">
+          Apache2 Ubuntu Default Page
+        </span>
+      </div>
+<!--      <div class="table_of_contents floating_element">
+        <div class="section_header section_header_grey">
+          TABLE OF CONTENTS
+        </div>
+        <div class="table_of_contents_item floating_element">
+          <a href="#about">About</a>
+        </div>
+        <div class="table_of_contents_item floating_element">
+          <a href="#changes">Changes</a>
+        </div>
+        <div class="table_of_contents_item floating_element">
+          <a href="#scope">Scope</a>
+        </div>
+        <div class="table_of_contents_item floating_element">
+          <a href="#files">Config files</a>
+        </div>
+      </div>
+-->
+      <div class="content_section floating_element">
+
+
+        <div class="section_header section_header_red">
+          <div id="about"></div>
+          It works!
+        </div>
+        <div class="content_section_text">
+          <p>
+                This is the default welcome page used to test the correct 
+                operation of the Apache2 server after installation on Ubuntu systems.
+                It is based on the equivalent page on Debian, from which the Ubuntu Apache
+                packaging is derived.
+                If you can read this page, it means that the Apache HTTP server installed at
+                this site is working properly. You should <b>replace this file</b> (located at
+                <tt>/var/www/html/index.html</tt>) before continuing to operate your HTTP server.
+          </p>
+
+
+          <p>
+                If you are a normal user of this web site and don't know what this page is
+                about, this probably means that the site is currently unavailable due to
+                maintenance.
+                If the problem persists, please contact the site's administrator.
+          </p>
+
+        </div>
+        <div class="section_header">
+          <div id="changes"></div>
+                Configuration Overview
+        </div>
+        <div class="content_section_text">
+          <p>
+                Ubuntu's Apache2 default configuration is different from the
+                upstream default configuration, and split into several files optimized for
+                interaction with Ubuntu tools. The configuration system is
+                <b>fully documented in
+                /usr/share/doc/apache2/README.Debian.gz</b>. Refer to this for the full
+                documentation. Documentation for the web server itself can be
+                found by accessing the <a href="/manual">manual</a> if the <tt>apache2-doc</tt>
+                package was installed on this server.
+
+          </p>
+          <p>
+                The configuration layout for an Apache2 web server installation on Ubuntu systems is as follows:
+          </p>
+          <pre>
+/etc/apache2/
+|-- apache2.conf
+|       `--  ports.conf
+|-- mods-enabled
+|       |-- *.load
+|       `-- *.conf
+|-- conf-enabled
+|       `-- *.conf
+|-- sites-enabled
+|       `-- *.conf
+          </pre>
+          <ul>
+                        <li>
+                           <tt>apache2.conf</tt> is the main configuration
+                           file. It puts the pieces together by including all remaining configuration
+                           files when starting up the web server.
+                        </li>
+
+                        <li>
+                           <tt>ports.conf</tt> is always included from the
+                           main configuration file. It is used to determine the listening ports for
+                           incoming connections, and this file can be customized anytime.
+                        </li>
+
+                        <li>
+                           Configuration files in the <tt>mods-enabled/</tt>,
+                           <tt>conf-enabled/</tt> and <tt>sites-enabled/</tt> directories contain
+                           particular configuration snippets which manage modules, global configuration
+                           fragments, or virtual host configurations, respectively.
+                        </li>
+
+                        <li>
+                           They are activated by symlinking available
+                           configuration files from their respective
+                           *-available/ counterparts. These should be managed
+                           by using our helpers
+                           <tt>
+                                a2enmod,
+                                a2dismod,
+                           </tt>
+                           <tt>
+                                a2ensite,
+                                a2dissite,
+                            </tt>
+                                and
+                           <tt>
+                                a2enconf,
+                                a2disconf
+                           </tt>. See their respective man pages for detailed information.
+                        </li>
+
+                        <li>
+                           The binary is called apache2. Due to the use of
+                           environment variables, in the default configuration, apache2 needs to be
+                           started/stopped with <tt>/etc/init.d/apache2</tt> or <tt>apache2ctl</tt>.
+                           <b>Calling <tt>/usr/bin/apache2</tt> directly will not work</b> with the
+                           default configuration.
+                        </li>
+          </ul>
+        </div>
+
+        <div class="section_header">
+            <div id="docroot"></div>
+                Document Roots
+        </div>
+
+        <div class="content_section_text">
+            <p>
+                By default, Ubuntu does not allow access through the web browser to
+                <em>any</em> file apart of those located in <tt>/var/www</tt>,
+                <a href="http://httpd.apache.org/docs/2.4/mod/mod_userdir.html" rel="nofollow">public_html</a>
+                directories (when enabled) and <tt>/usr/share</tt> (for web
+                applications). If your site is using a web document root
+                located elsewhere (such as in <tt>/srv</tt>) you may need to whitelist your
+                document root directory in <tt>/etc/apache2/apache2.conf</tt>.
+            </p>
+            <p>
+                The default Ubuntu document root is <tt>/var/www/html</tt>. You
+                can make your own virtual hosts under /var/www. This is different
+                to previous releases which provides better security out of the box.
+            </p>
+        </div>
+
+        <div class="section_header">
+          <div id="bugs"></div>
+                Reporting Problems
+        </div>
+        <div class="content_section_text">
+          <p>
+                Please use the <tt>ubuntu-bug</tt> tool to report bugs in the
+                Apache2 package with Ubuntu. However, check <a
+                href="https://bugs.launchpad.net/ubuntu/+source/apache2"
+                rel="nofollow">existing bug reports</a> before reporting a new bug.
+          </p>
+          <p>
+                Please report bugs specific to modules (such as PHP and others)
+                to respective packages, not to the web server itself.
+          </p>
+        </div>
+
+
+
+
+      </div>
+    </div>
+    <div class="validator">
+    </div>
+  </body>
+</html>
+
+[?2004h]0;root@3290179-cj29118: ~root@3290179-cj29118:~# exit
+[?2004lexit
+
+Script done on 2024-08-07 01:03:04+03:00 [COMMAND_EXIT_CODE="0"]
