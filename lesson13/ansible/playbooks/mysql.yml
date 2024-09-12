@@ -1,0 +1,4 @@
+- name: Mysql
+ hosts: prod
+ roles:
+ - role: mysql

@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "prod" do |prod|
+    prod.vm.box = "spox/ubuntu-arm"
+    prod.vm.box_version = "1.0.0"
+    prod.vm.box_check_update = false
+    prod.vm.hostname = "prod"
+    prod.vm.define "prod"
+    prod.vm.network "private_network", ip: "172.17.177.25"
+  end
+end

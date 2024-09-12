@@ -1,0 +1,4 @@
+- name: Wordpress
+ hosts: prod
+ roles:
+ - role: wordpress
