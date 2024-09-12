@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Install packages
+      apt:
+        pkg:
+          - wget
+          - htop
+          - nginx
+        state: present
+        update_cache: yes
+
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+
+    - name: Display environment information
+      debug:
+        msg: "This host is in {{ lookup('env', 'HOME') }} environment"
