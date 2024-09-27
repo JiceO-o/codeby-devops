@@ -1,0 +1,257 @@
+# data.twc_configurator.configurator:
+data "twc_configurator" "configurator" {
+    cpu_frequency = "3.3"
+    disk_type     = "nvme"
+    id            = "11"
+    location      = "ru-1"
+
+    requirements {
+        cpu_max                = 104
+        cpu_min                = 1
+        cpu_step               = 1
+        disk_max               = 2048000
+        disk_min               = 15360
+        disk_step              = 5120
+        network_bandwidth_max  = 1000
+        network_bandwidth_min  = 1000
+        network_bandwidth_step = 100
+        ram_max                = 747520
+        ram_min                = 1024
+        ram_step               = 1024
+    }
+}
+
+# data.twc_os.os:
+data "twc_os" "os" {
+    family           = "linux"
+    id               = "61"
+    name             = "ubuntu"
+    version          = "20.04"
+    version_codename = "focal"
+
+    requirements {
+        bandwidth_min = 0
+        cpu_min       = 0
+        disk_min      = 0
+        ram_min       = 0
+    }
+}
+
+# twc_firewall.private-firewall:
+resource "twc_firewall" "private-firewall" {
+    description = "Some example firewall"
+    id          = "81d68a3c-227b-4fa3-91fe-03128924c139"
+    name        = "private-firewall"
+
+    link {
+        id   = "3520145"
+        type = "server"
+    }
+}
+
+# twc_firewall_rule.private-22:
+resource "twc_firewall_rule" "private-22" {
+    cidr        = "0.0.0.0/0"
+    description = "Some example firewall rule"
+    direction   = "ingress"
+    firewall_id = "81d68a3c-227b-4fa3-91fe-03128924c139"
+    id          = "f91e0222-0fa8-4408-999a-768748e9c8fe"
+    port        = 22
+    protocol    = "tcp"
+}
+
+# twc_firewall_rule.private-8080:
+resource "twc_firewall_rule" "private-8080" {
+    cidr        = "0.0.0.0/0"
+    description = "Some example firewall rule"
+    direction   = "ingress"
+    firewall_id = "81d68a3c-227b-4fa3-91fe-03128924c139"
+    id          = "b4c13d8c-26c8-4a82-9e00-da6c8a36b69f"
+    port        = 8080
+    protocol    = "tcp"
+}
+
+# twc_server.private_server:
+resource "twc_server" "private_server" {
+    availability_zone = "spb-3"
+    boot_mode         = "std"
+    configurator_id   = 11
+    cpu               = 2
+    cpu_frequency     = "3.3"
+    disks             = [
+        {
+            id          = 20059065
+            is_mounted  = true
+            is_system   = true
+            size        = 15360
+            status      = "done"
+            system_name = "vda"
+            type        = "nvme"
+            used        = 0
+        },
+    ]
+    id                = "3520145"
+    is_ddos_guard     = false
+    location          = "ru-1"
+    name              = "private_server"
+    networks          = [
+        {
+            bandwidth     = 1000
+            ips           = []
+            is_ddos_guard = false
+            nat_mode      = ""
+            type          = "public"
+        },
+        {
+            bandwidth     = 0
+            ips           = [
+                {
+                    ip      = "10.0.1.4"
+                    is_main = false
+                    ptr     = ""
+                    type    = "ipv4"
+                },
+            ]
+            is_ddos_guard = false
+            nat_mode      = "no_nat"
+            type          = "local"
+        },
+    ]
+    os                = [
+        {
+            id      = 61
+            name    = "ubuntu"
+            version = "20.04"
+        },
+    ]
+    os_id             = 61
+    preset_id         = 0
+    project_id        = 535911
+    ram               = 4096
+    software          = []
+    ssh_keys_ids      = [
+        229911,
+    ]
+    start_at          = "2024-09-25T12:57:58.000Z"
+    status            = "on"
+
+    configuration {
+        configurator_id = 11
+        cpu             = 2
+        disk            = 15360
+        ram             = 4096
+    }
+
+    local_network {
+        id = "network-721a8fb94512469889ff25b59420c93d"
+        ip = "10.0.1.4"
+    }
+}
+
+# twc_server.public_server: (tainted)
+resource "twc_server" "public_server" {
+    availability_zone = "spb-3"
+    boot_mode         = "std"
+    configurator_id   = 11
+    cpu               = 2
+    cpu_frequency     = "3.3"
+    disks             = [
+        {
+            id          = 20059225
+            is_mounted  = true
+            is_system   = true
+            size        = 15360
+            status      = "done"
+            system_name = "vda"
+            type        = "nvme"
+            used        = 0
+        },
+    ]
+    id                = "3520301"
+    is_ddos_guard     = false
+    location          = "ru-1"
+    name              = "public_server"
+    networks          = [
+        {
+            bandwidth     = 1000
+            ips           = []
+            is_ddos_guard = false
+            nat_mode      = ""
+            type          = "public"
+        },
+        {
+            bandwidth     = 0
+            ips           = [
+                {
+                    ip      = "10.0.2.4"
+                    is_main = false
+                    ptr     = ""
+                    type    = "ipv4"
+                },
+            ]
+            is_ddos_guard = false
+            nat_mode      = "no_nat"
+            type          = "local"
+        },
+    ]
+    os                = [
+        {
+            id      = 61
+            name    = "ubuntu"
+            version = "20.04"
+        },
+    ]
+    os_id             = 61
+    preset_id         = 0
+    project_id        = 535911
+    ram               = 4096
+    software          = []
+    ssh_keys_ids      = [
+        229911,
+    ]
+    status            = "installing"
+
+    configuration {
+        configurator_id = 11
+        cpu             = 2
+        disk            = 15360
+        ram             = 4096
+    }
+
+    local_network {
+        id = "network-a29625a66b074939a623d8b78ca8eafc"
+        ip = "10.0.2.4"
+    }
+}
+
+# twc_ssh_key.your-key:
+resource "twc_ssh_key" "your-key" {
+    body       = <<-EOT
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFeEMIMba1OUZgUDk60u+QHBBnbqRA0hVPTbuanjkFTy aleksejockasov@MacBook-Pro-Aleksej.local
+    EOT
+    created_at = "2024-09-25T15:57:05.000Z"
+    id         = "229911"
+    name       = "Your key"
+    used_by    = [
+        {
+            id   = 0
+            name = "private_server"
+        },
+    ]
+}
+
+# twc_vpc.private:
+resource "twc_vpc" "private" {
+    id        = "network-721a8fb94512469889ff25b59420c93d"
+    location  = "ru-1"
+    name      = "private"
+    subnet_v4 = "10.0.1.0/24"
+}
+
+# twc_vpc.public:
+resource "twc_vpc" "public" {
+    id        = "network-a29625a66b074939a623d8b78ca8eafc"
+    location  = "ru-1"
+    name      = "public"
+    subnet_v4 = "10.0.2.0/24"
+}
