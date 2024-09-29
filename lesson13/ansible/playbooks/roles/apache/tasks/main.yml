@@ -1,0 +1,5 @@
+---
+#Tasks file for Apache
+- include_tasks: 01-Create-document-root.yml
+- include_tasks: 02-Set-up-Apache-VirtualHost.yml
+- include_tasks: 03-sites.yml

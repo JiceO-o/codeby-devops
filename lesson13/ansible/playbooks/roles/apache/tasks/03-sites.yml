@@ -1,0 +1,22 @@
+---
+- name: Apache | sites config 
+  become: true
+  block:
+
+  - name: Enable new site
+    shell: /usr/sbin/a2ensite {{ http_conf }}
+    notify: Reload Apache
+    tags: [ apache ]
+
+  - name: Disable default Apache site
+    shell: /usr/sbin/a2dissite 000-default.conf
+    notify: Restart Apache
+    tags: [ apache ]
+
+# UFW Configuration
+  - name: "UFW - Allow HTTP on port {{ http_port }}"
+    ufw:
+      rule: allow
+      port: "{{ http_port }}"
+      proto: tcp
+    tags: [ system ]
