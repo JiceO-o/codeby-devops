@@ -3,20 +3,24 @@ variable "vpc_id" {
   type        = string
 }
 
-data "aws_subnet_ids" "this" {
+data "twc_subnet_ids" "this" {
   vpc_id = var.vpc_id
 }
 
-data "aws_subnet" "subnets" {
-  count = length(data.aws_subnet_ids.this.ids)
+data "twc_subnet" "subnets" {
+  count = length(data.twc_subnet_ids.this.ids)
 
-  id = data.aws_subnet_ids.this.ids[count.index]
+  id = data.twc_subnet_ids.this.ids[count.index]
 }
 
 output "subnet_ids" {
-  value = data.aws_subnet_ids.this.ids
+  value = data.twc_subnet_ids.this.ids
 }
 
 output "subnet_details" {
-  value = data.aws_subnet.subnets[*].id
+  value = data.twc_subnet.subnets[*].id
+}
+
+output "subnet_by_zone" {
+  value = { for s in data.twc_subnet.all_subnets : s.availability_zone => s.id }
 }

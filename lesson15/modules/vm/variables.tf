@@ -1,6 +1,6 @@
-variable "vpc_id" {
-  description = "ID VPC для создания ВМ"
-  type        = string
+variable "subnet_ids_by_zone" {
+  description = "Словарь subnet_id, сгруппированных по зонам"
+  type        = map(string)
 }
 
 variable "zone" {

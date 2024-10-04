@@ -4,7 +4,11 @@ module "subnet_data" {
 }
 
 module "vm" {
-  source   = "./modules/vm"
-  vpc_id   = "twc_vpc"
-  zone     = "ru-1"
+  source = "./modules/vm"
+  
+  subnet_ids_by_zone = { 
+    for zone, id in module.subnet_data.subnet_by_zone : zone => id
+  }
+
+  zone = "ru-1"
 }
