@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+spec:
+  type: {{ .Values.wordpress.service.type }}
+  ports:
+    - port: {{ .Values.wordpress.service.port }}
+      targetPort: 80
+  selector:
+    app: wordpress
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: {{ .Values.wordpress.image.repository }}:{{ .Values.wordpress.image.tag }}
+        envFrom:
+          - configMapRef:
+              name: wordpress-config
+        env:
+          - name: WORDPRESS_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: secrets
+                key: WORDPRESS_DB_PASSWORD
+        ports:
+          - containerPort: 80
+        volumeMounts:
+          - name: wordpress-storage
+            mountPath: /var/www/html
+      volumes:
+        - name: wordpress-storage
+          persistentVolumeClaim:
+            claimName: wordpress-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wordpress-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.wordpress.size }}
+  storageClassName: {{ .Values.persistence.wordpress.storageClass }}

@@ -1,0 +1,46 @@
+replicaCount: 1
+
+mysql:
+  image:
+    repository: mysql
+    tag: "5.7"
+  rootPassword: "secretrootpassword"
+  user: "wordpress"
+  password: "wordpresspassword"
+  database: "wordpress"
+  service:
+    name: mysql
+    port: 3306
+
+wordpress:
+  image:
+    repository: wordpress
+    tag: "5.8"
+  service:
+    type: ClusterIP
+    port: 80
+
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+ingress:
+  enabled: true
+  host: wordpress.local
+  path: /
+  annotations: {}
+
+persistence:
+  mysql:
+    enabled: true
+    storageClass: "standard"
+    size: 10Gi
+  wordpress:
+    enabled: true
+    storageClass: "standard"
+    size: 10Gi
+
+networkPolicy:
+  enabled: true
