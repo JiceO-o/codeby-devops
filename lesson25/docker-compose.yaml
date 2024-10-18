@@ -1,0 +1,38 @@
+services:
+  jenkins-server:
+    depends_on:
+      - jenkins-docker
+    image: jenkins/jenkins:2.414.1-jdk17
+    container_name: jenkins-master
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+      - 50000:50000
+    environment:
+      DOCKER_HOST: tcp://jenkins-docker:2375
+      DOCKER_CERT_PATH: ""
+      DOCKER_TLS_VERIFY: ""
+    volumes:
+      - jenkins-data:/var/jenkins_home
+    networks:
+      - jenkins-network
+  jenkins-docker:
+    image: docker:dind
+    container_name: jenkins-docker
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    restart: unless-stopped
+    ports:
+      - 2375:2375
+    volumes:
+      - jenkins-data:/var/jenkins_home
+    networks:
+      - jenkins-network
+
+volumes:
+  jenkins-data:
+  jenkins-docker-data:
+
+networks:
+  jenkins-network:
