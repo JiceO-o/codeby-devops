@@ -2,11 +2,12 @@ pipeline {
     agent {
         dockerContainer('maven:3.9.2')
     }
-    environment {
-        GITHUB_CRED = "git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/JiceO-o/codeby-devops.git'"
-        GITHUB_URL = "https://github.com/JiceO-o/codeby-devops.git"
-        }
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/JiceO-o/codeby-devops.git'
+            }
+        }
         stage('Build') {
             parallel {
                 stage('hello-world!') {
@@ -14,19 +15,19 @@ pipeline {
                         changeset "**/hello-world!/**"
                     }
                     steps {
-                        dir('lesson26/hello-world!'){
+                        dir('lesson26/hello-world!') {
                             sh 'mvn -B -DskipTests clean package'
                             sh 'ls -la'
                             sh 'ls -la target'
                         }
                     }
                 }
-                stage('Hello Jenkins') {
+                stage('hello-jenkins!') {
                     when {
                         changeset "**/hello-jenkins!/**"
                     }
                     steps {
-                        dir('lesson26/hello-jenkins!'){
+                        dir('lesson26/hello-jenkins!') {
                             sh 'mvn -B -DskipTests clean package'
                             sh 'ls -la'
                             sh 'ls -la target'
@@ -38,7 +39,7 @@ pipeline {
                         changeset "**/hello-devops!/**"
                     }
                     steps {
-                        dir('lesson26/hello-devops!'){
+                        dir('lesson26/hello-devops!') {
                             sh 'mvn -B -DskipTests clean package'
                             sh 'ls -la'
                             sh 'ls -la target'
@@ -46,24 +47,25 @@ pipeline {
                     }
                 }
             }
+        }
         stage('Test') {
             parallel {
-                stage('Hello World') {
+                stage('hello-world!') {
                     when {
                         changeset "**/hello-world!/**"
                     }
                     steps {
-                        dir('lesson26/hello-world!'){
+                        dir('lesson26/hello-world!') {
                             sh 'mvn test'
                         }
                     }
                 }
-                stage('Hello Jenkins') {
+                stage('hello-jenkins!') {
                     when {
                         changeset "**/hello-jenkins!/**"
                     }
                     steps {
-                        dir('lesson26/hello-jenkins!'){
+                        dir('lesson26/hello-jenkins!') {
                             sh 'mvn test'
                         }
                     }
@@ -73,7 +75,7 @@ pipeline {
                         changeset "**/hello-devops!/**"
                     }
                     steps {
-                        dir('lesson26/hello-devops!'){
+                        dir('lesson26/hello-devops!') {
                             sh 'mvn test'
                         }
                     }
@@ -82,7 +84,7 @@ pipeline {
         }
         stage('Deliver') {
             parallel {
-                stage('Hello World') {
+                stage('hello-world!') {
                     when {
                         changeset "**/hello-world!/**"
                     }
@@ -90,7 +92,7 @@ pipeline {
                         sh "./lesson26/hello-world!/jenkins/scripts/deliver.sh"
                     }
                 }
-                stage('Hello Jenkins') {
+                stage('hello-jenkins!') {
                     when {
                         changeset "**/hello-jenkins!/**"
                     }
@@ -109,5 +111,4 @@ pipeline {
             }
         }
     }
-}
 }
