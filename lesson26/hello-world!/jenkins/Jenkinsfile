@@ -8,11 +8,11 @@ pipeline {
         APP_DIR = "lesson26/hello-world!"
     }
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: env.GITHUB_URL
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: env.GITHUB_URL
+        //     }
+        // }
         stage('Build') {
             steps {
                 dir(env.APP_DIR){
