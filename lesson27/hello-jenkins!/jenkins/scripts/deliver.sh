@@ -24,4 +24,4 @@ echo 'The following command runs and outputs the execution of your Java'
 echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
 echo 'edited text'
 set -x
-java -jar lesson26/hello-jenkins!/target/my-app-1.0-SNAPSHOT.jar
+java -jar lesson27/hello-jenkins!/target/my-app-1.0-SNAPSHOT.jar
