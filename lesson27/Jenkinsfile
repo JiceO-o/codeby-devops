@@ -1,0 +1,168 @@
+pipeline {
+    agent {
+        dockerContainer('maven:3.9.2')
+    }
+    environment {
+        // GITHUB_CRED = "git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/JiceO-o/codeby-devops.git'"
+        // GITHUB_URL = "https://github.com/JiceO-o/codeby-devops.git"
+        // APP_DIR = "lesson26/hello-world!"
+        SONARQUBE_URL = "http://172.21.0.5:9000"
+        SONARQUBE_PROJECT_KEY = "maven"
+        SONARQUBE_CREDENTIALS_ID = "sonar"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/JiceO-o/codeby-devops.git'
+            }
+        }
+        stage('Build') {
+            parallel {
+                stage('hello-world!') {
+                    when {
+                        changeset "**/hello-world!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-world!') {
+                            sh 'mvn -B -DskipTests clean package'
+                            sh 'ls -la'
+                            sh 'ls -la target'
+                        }
+                    }
+                }
+                stage('hello-jenkins!') {
+                    when {
+                        changeset "**/hello-jenkins!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-jenkins!') {
+                            sh 'mvn -B -DskipTests clean package'
+                            sh 'ls -la'
+                            sh 'ls -la target'
+                        }
+                    }
+                }
+                stage('hello-devops!') {
+                    when {
+                        changeset "**/hello-devops!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-devops!') {
+                            sh 'mvn -B -DskipTests clean package'
+                            sh 'ls -la'
+                            sh 'ls -la target'
+                        }
+                    }
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            parallel {
+                stage('Hello World') {
+                    when {
+                        changeset "**/hello-world!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-world!') {
+                            withSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarServer') { 
+                                sh 'mvn sonar:sonar -Dsonar.projectKey=${SONARQUBE_PROJECT_KEY} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_CREDENTIALS_ID}'
+                            }
+                        }
+                    }
+                }
+                stage('Hello Jenkins') {
+                    when {
+                        changeset "**/hello-jenkins!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-jenkins!') {
+                            withSonarQubeEnv('SonarQube') {
+                                sh 'mvn sonar:sonar -Dsonar.projectKey=${SONARQUBE_PROJECT_KEY} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_CREDENTIALS_ID}'
+                            }
+                        }
+                    }
+                }
+                stage('hello-devops!') {
+                    when {
+                        changeset "**/hello-devops!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-devops!') {
+                            withSonarQubeEnv('SonarQube') {
+                                sh 'mvn sonar:sonar -Dsonar.projectKey=${SONARQUBE_PROJECT_KEY} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_CREDENTIALS_ID}'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+        stage('Test') {
+            parallel {
+                stage('hello-world!') {
+                    when {
+                        changeset "**/hello-world!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-world!') {
+                            sh 'mvn test'
+                        }
+                    }
+                }
+                stage('hello-jenkins!') {
+                    when {
+                        changeset "**/hello-jenkins!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-jenkins!') {
+                            sh 'mvn test'
+                        }
+                    }
+                }
+                stage('hello-devops!') {
+                    when {
+                        changeset "**/hello-devops!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-devops!') {
+                            sh 'mvn test'
+                        }
+                    }
+                }
+            }
+        }
+        stage('Deliver') {
+            parallel {
+                stage('hello-world!') {
+                    when {
+                        changeset "**/hello-world!/**"
+                    }
+                    steps {
+                        sh "./lesson26/hello-world!/jenkins/scripts/deliver.sh"
+                    }
+                }
+                stage('hello-jenkins!') {
+                    when {
+                        changeset "**/hello-jenkins!/**"
+                    }
+                    steps {
+                        sh "./lesson26/hello-jenkins!/jenkins/scripts/deliver.sh"
+                    }
+                }
+                stage('hello-devops!') {
+                    when {
+                        changeset "**/hello-devops!/**"
+                    }
+                    steps {
+                        sh "./lesson26/hello-devops!/jenkins/scripts/deliver.sh"
+                    }
+                }
+            }
+        }
+    }
+}
+ 

@@ -1,0 +1,43 @@
+pipeline {
+    agent {
+        dockerContainer('maven:3.9.2')
+    }
+    environment {
+        GITHUB_CRED = "git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/JiceO-o/codeby-devops.git'"
+        GITHUB_URL = "https://github.com/JiceO-o/codeby-devops.git"
+        APP_DIR = "lesson26/hello-world!"
+    }
+    stages {
+        // stage('Checkout') {
+        //     steps {
+        //         git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: env.GITHUB_URL
+        //     }
+        // }
+        stage('Build') {
+            steps {
+                dir(env.APP_DIR){
+                    sh 'mvn -B -DskipTests clean package'
+                    sh 'ls -la'
+                    sh 'ls -la target'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                dir(env.APP_DIR){
+                    sh 'mvn test'
+                }
+            }
+            post {
+                always {
+                    junit "${env.APP_DIR}/target/surefire-reports/*.xml"
+                }
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh "./${env.APP_DIR}/jenkins/scripts/deliver.sh"
+            }
+        }
+    }
+}
