@@ -1,0 +1,114 @@
+pipeline {
+    agent {
+        dockerContainer('maven:3.9.2')
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'lesson26', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/JiceO-o/codeby-devops.git'
+            }
+        }
+        stage('Build') {
+            parallel {
+                stage('hello-world!') {
+                    when {
+                        changeset "**/hello-world!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-world!') {
+                            sh 'mvn -B -DskipTests clean package'
+                            sh 'ls -la'
+                            sh 'ls -la target'
+                        }
+                    }
+                }
+                stage('hello-jenkins!') {
+                    when {
+                        changeset "**/hello-jenkins!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-jenkins!') {
+                            sh 'mvn -B -DskipTests clean package'
+                            sh 'ls -la'
+                            sh 'ls -la target'
+                        }
+                    }
+                }
+                stage('hello-devops!') {
+                    when {
+                        changeset "**/hello-devops!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-devops!') {
+                            sh 'mvn -B -DskipTests clean package'
+                            sh 'ls -la'
+                            sh 'ls -la target'
+                        }
+                    }
+                }
+            }
+        }
+        stage('Test') {
+            parallel {
+                stage('hello-world!') {
+                    when {
+                        changeset "**/hello-world!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-world!') {
+                            sh 'mvn test'
+                        }
+                    }
+                }
+                stage('hello-jenkins!') {
+                    when {
+                        changeset "**/hello-jenkins!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-jenkins!') {
+                            sh 'mvn test'
+                        }
+                    }
+                }
+                stage('hello-devops!') {
+                    when {
+                        changeset "**/hello-devops!/**"
+                    }
+                    steps {
+                        dir('lesson26/hello-devops!') {
+                            sh 'mvn test'
+                        }
+                    }
+                }
+            }
+        }
+        stage('Deliver') {
+            parallel {
+                stage('hello-world!') {
+                    when {
+                        changeset "**/hello-world!/**"
+                    }
+                    steps {
+                        sh "./lesson26/hello-world!/jenkins/scripts/deliver.sh"
+                    }
+                }
+                stage('hello-jenkins!') {
+                    when {
+                        changeset "**/hello-jenkins!/**"
+                    }
+                    steps {
+                        sh "./lesson26/hello-jenkins!/jenkins/scripts/deliver.sh"
+                    }
+                }
+                stage('hello-devops!') {
+                    when {
+                        changeset "**/hello-devops!/**"
+                    }
+                    steps {
+                        sh "./lesson26/hello-devops!/jenkins/scripts/deliver.sh"
+                    }
+                }
+            }
+        }
+    }
+}
