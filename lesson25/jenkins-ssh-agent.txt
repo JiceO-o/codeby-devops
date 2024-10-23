@@ -1,0 +1,3 @@
+docker run -d --rm --name=agent1 -p 23:22 --network lesson25_jenkins-network \
+-e "JENKINS_AGENT_SSH_PUBKEY=sshkeypub" \
+jenkins/ssh-agent:debian-jdk17
